@@ -5,6 +5,10 @@ VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cs_sqlo", "cs_sqlo\cs_sqlo.csproj", "{5D6CF446-80F5-40D4-B956-39869597F98B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cs_sqlo_my", "cs_sqlo_my\cs_sqlo_my.csproj", "{25D0D98B-2734-4445-82AD-260D7EF4877D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cs_sqlo_ss", "cs_sqlo_ss\cs_sqlo_ss.csproj", "{15DE482F-5207-495F-8353-4C908D9671F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{5D6CF446-80F5-40D4-B956-39869597F98B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D6CF446-80F5-40D4-B956-39869597F98B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D6CF446-80F5-40D4-B956-39869597F98B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25D0D98B-2734-4445-82AD-260D7EF4877D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25D0D98B-2734-4445-82AD-260D7EF4877D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25D0D98B-2734-4445-82AD-260D7EF4877D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25D0D98B-2734-4445-82AD-260D7EF4877D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15DE482F-5207-495F-8353-4C908D9671F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15DE482F-5207-495F-8353-4C908D9671F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15DE482F-5207-495F-8353-4C908D9671F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15DE482F-5207-495F-8353-4C908D9671F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
