@@ -31,9 +31,8 @@ namespace cs_sqlo_my
         /*
          * config["connection_string"] = "server=127.0.0.1;uid=root;pwd=12345;database=test"
          */
-        public DbSs(Dictionary<string, object> config)
+        public DbSs(Dictionary<string, object> config): base(config) 
         {
-            _config = config;
             _conn = new MySqlConnection();
             _conn.ConnectionString = (string)config["connection_string"];
             _conn.Open();

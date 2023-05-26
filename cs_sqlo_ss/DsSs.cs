@@ -11,14 +11,15 @@ namespace cs_sqlo_ss
         /*
          * config["connection_string"] = "server=127.0.0.1;uid=root;pwd=12345;database=test"
          */
-        public DbSs(Dictionary<string, object> config)
+        public DbSs(Dictionary<string, object> config) : base(config)
         {
-            _config = config;
             using SqlConnection _conn = new SqlConnection((string)config["connection_string"]);
             _conn.Open();
         }
 
         public SqlConnection conn() => _conn;
+
+
         
 
     }

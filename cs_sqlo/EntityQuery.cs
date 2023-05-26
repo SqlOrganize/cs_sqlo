@@ -10,18 +10,6 @@ namespace cs_sqlo
     {
     }
 
-    /**
-     * mysql
-     */
-    internal class EntityQueryMy : EntityQuery
-    {
-    }
-
-    /**
-     * sql server
-     */
-    internal class EntityQuerySs : EntityQuery
-    {
-    }
+   
 
 }
