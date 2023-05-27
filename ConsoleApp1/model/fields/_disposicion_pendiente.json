@@ -1,0 +1,43 @@
+{
+  "id": {
+    "field_type": "pk",
+    "default": null,
+    "alias": "id",
+    "entity_name": "disposicion_pendiente",
+    "type": "str",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "disposicion": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "dis",
+    "entity_name": "disposicion_pendiente",
+    "entity_ref_name": "disposicion",  
+    "type": "str",  
+    "length": 45,
+    "name": "disposicion"
+  },
+
+  "alumno": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "alu",
+    "entity_name": "disposicion_pendiente",
+    "entity_ref_name": "alumno",  
+    "type": "str",  
+    "length": 45,
+    "name": "alumno"
+  },
+
+  "modo": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "moa",
+    "entity_name": "disposicion_pendiente",
+    "type": "str",  
+    "length": 45,
+    "name": "modo"
+  }
+}

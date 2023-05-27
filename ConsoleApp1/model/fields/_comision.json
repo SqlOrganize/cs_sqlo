@@ -1,0 +1,175 @@
+{
+  "id": {
+    "field_type": "pk",
+    "default": null,
+    "alias": "id",
+    "entity_name": "comision",
+    "type": "str",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "turno": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "tur",
+    "entity_name": "comision",
+    "type": "str",  
+    "length": 45,
+    "name": "turno"
+  },
+
+  "division": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "dia",
+    "entity_name": "comision",
+    "type": "str",  
+    "length": 45,
+    "name": "division"
+  },
+
+  "comentario": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "com",
+    "entity_name": "comision",
+    "type": "str",  
+    "length": 65535,
+    "name": "comentario"
+  },
+
+  "autorizada": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "aut",
+    "entity_name": "comision",
+    "type": "bool",  
+    "length": 1,
+    "name": "autorizada"
+  },
+
+  "apertura": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "ape",
+    "entity_name": "comision",
+    "type": "bool",  
+    "length": 1,
+    "name": "apertura"
+  },
+
+  "publicada": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "pub",
+    "entity_name": "comision",
+    "type": "bool",  
+    "length": 1,
+    "name": "publicada"
+  },
+
+  "observaciones": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "obs",
+    "entity_name": "comision",
+    "type": "str",  
+    "length": 65535,
+    "name": "observaciones"
+  },
+
+  "alta": {
+    "field_type": "nf",
+    "default": "current_timestamp()",
+    "alias": "alt",
+    "entity_name": "comision",
+    "type": "datetime",  
+    "name": "alta"
+  },
+
+  "sede": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "sed",
+    "entity_name": "comision",
+    "entity_ref_name": "sede",  
+    "type": "str",  
+    "length": 45,
+    "name": "sede"
+  },
+
+  "modalidad": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "moa",
+    "entity_name": "comision",
+    "entity_ref_name": "modalidad",  
+    "type": "str",  
+    "length": 45,
+    "name": "modalidad"
+  },
+
+  "planificacion": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "pla",
+    "entity_name": "comision",
+    "entity_ref_name": "planificacion",  
+    "type": "str",  
+    "length": 45,
+    "name": "planificacion"
+  },
+
+  "comision_siguiente": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "cs",
+    "entity_name": "comision",
+    "entity_ref_name": "comision",  
+    "type": "str",  
+    "length": 45,
+    "name": "comision_siguiente"
+  },
+
+  "calendario": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "cal",
+    "entity_name": "comision",
+    "entity_ref_name": "calendario",  
+    "type": "str",  
+    "length": 45,
+    "name": "calendario"
+  },
+
+  "identificacion": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "ide",
+    "entity_name": "comision",
+    "type": "str",  
+    "length": 45,
+    "name": "identificacion"
+  },
+
+  "estado": {
+    "field_type": "nf",
+    "default": "Confirma",
+    "alias": "est",
+    "entity_name": "comision",
+    "type": "str",  
+    "length": 45,
+    "name": "estado"
+  },
+
+  "configuracion": {
+    "field_type": "nf",
+    "default": "Histórica",
+    "alias": "con",
+    "entity_name": "comision",
+    "type": "str",  
+    "length": 45,
+    "name": "configuracion"
+  }
+}

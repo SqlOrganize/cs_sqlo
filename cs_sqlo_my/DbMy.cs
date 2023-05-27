@@ -12,7 +12,7 @@ namespace cs_sqlo_my
         /*
          * config["connection_string"] = "server=127.0.0.1;uid=root;pwd=12345;database=test"
          */
-        public DbMy(Dictionary<string, object> config)
+        public DbMy(Dictionary<string, object> config): base(config)
         {
             _config = config;
             _conn = new MySqlConnection();

@@ -1,0 +1,51 @@
+{
+  "id": {
+    "field_type": "pk",
+    "default": null,
+    "alias": "id",
+    "entity_name": "horario",
+    "type": "str",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "hora_inicio": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "hi",
+    "entity_name": "horario",
+    "type": "time",  
+    "name": "hora_inicio"
+  },
+
+  "hora_fin": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "hf",
+    "entity_name": "horario",
+    "type": "time",  
+    "name": "hora_fin"
+  },
+
+  "curso": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "cur",
+    "entity_name": "horario",
+    "entity_ref_name": "curso",  
+    "type": "str",  
+    "length": 45,
+    "name": "curso"
+  },
+
+  "dia": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "dia",
+    "entity_name": "horario",
+    "entity_ref_name": "dia",  
+    "type": "str",  
+    "length": 45,
+    "name": "dia"
+  }
+}

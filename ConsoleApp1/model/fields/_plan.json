@@ -1,0 +1,41 @@
+{
+  "id": {
+    "field_type": "pk",
+    "default": null,
+    "alias": "id",
+    "entity_name": "plan",
+    "type": "str",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "orientacion": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "ori",
+    "entity_name": "plan",
+    "type": "str",  
+    "length": 45,
+    "name": "orientacion"
+  },
+
+  "resolucion": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "res",
+    "entity_name": "plan",
+    "type": "str",  
+    "length": 45,
+    "name": "resolucion"
+  },
+
+  "distribucion_horaria": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "dh",
+    "entity_name": "plan",
+    "type": "str",  
+    "length": 45,
+    "name": "distribucion_horaria"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "configuracion": {
+    "values": ["Histórica", "Nueva"]
+  },
+
+  "estado": {
+    "values": ["Confirma", "Rectifica", "Desdobla", "Reagrupa"]
+  },
+
+  "turno": {
+    "values": ["Mañana", "Tarde", "Vespertino"]
+  }
+
+}

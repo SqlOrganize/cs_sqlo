@@ -1,0 +1,72 @@
+{
+  "id": {
+    "field_type": "pk",
+    "default": null,
+    "alias": "id",
+    "entity_name": "alumno_comision",
+    "type": "str",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "creado": {
+    "field_type": "nf",
+    "default": "current_timestamp()",
+    "alias": "cre",
+    "entity_name": "alumno_comision",
+    "type": "datetime",  
+    "name": "creado"
+  },
+
+  "activo": {
+    "field_type": "nf",
+    "default": "0",
+    "alias": "act",
+    "entity_name": "alumno_comision",
+    "type": "bool",  
+    "length": 1,
+    "name": "activo"
+  },
+
+  "observaciones": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "obs",
+    "entity_name": "alumno_comision",
+    "type": "str",  
+    "length": 65535,
+    "name": "observaciones"
+  },
+
+  "comision": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "com",
+    "entity_name": "alumno_comision",
+    "entity_ref_name": "comision",  
+    "type": "str",  
+    "length": 45,
+    "name": "comision"
+  },
+
+  "alumno": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "alu",
+    "entity_name": "alumno_comision",
+    "entity_ref_name": "alumno",  
+    "type": "str",  
+    "length": 45,
+    "name": "alumno"
+  },
+
+  "estado": {
+    "field_type": "nf",
+    "default": "Activo",
+    "alias": "est",
+    "entity_name": "alumno_comision",
+    "type": "str",  
+    "length": 100,
+    "name": "estado"
+  }
+}

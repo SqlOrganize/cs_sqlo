@@ -1,0 +1,21 @@
+{
+  "id": {
+    "field_type": "pk",
+    "default": null,
+    "alias": "id",
+    "entity_name": "modalidad",
+    "type": "str",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "nombre": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "nom",
+    "entity_name": "modalidad",
+    "type": "str",  
+    "length": 45,
+    "name": "nombre"
+  }
+}

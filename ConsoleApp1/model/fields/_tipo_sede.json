@@ -1,0 +1,21 @@
+{
+  "id": {
+    "field_type": "pk",
+    "default": null,
+    "alias": "id",
+    "entity_name": "tipo_sede",
+    "type": "str",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "descripcion": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "des",
+    "entity_name": "tipo_sede",
+    "type": "str",  
+    "length": 255,
+    "name": "descripcion"
+  }
+}

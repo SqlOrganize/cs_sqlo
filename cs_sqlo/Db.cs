@@ -15,42 +15,46 @@ namespace cs_sqlo
         protected Dictionary<string, object> _condition = new();
         protected Dictionary<string, object> _tree = new();
         protected Dictionary<string, object> _relations = new();
-        protected Dictionary<string, object> _entities_config = new();
+        protected Dictionary<string, Dictionary<string, object>> _entities_config = new();
 
         public Db(Dictionary<string, object> config)
         {
             _config = config;
-            using (StreamReader r = new StreamReader(_config["path_model"] + "entity-tree.json")) {
-                _tree = (Dictionary<string, object>)JsonConvert.DeserializeObject(r.ReadToEnd());
+            string path = _config["path_model"] + "entity-tree.json";
+            using (StreamReader r = new StreamReader(path, Encoding.UTF8))
+            {
+                _tree = JsonConvert.DeserializeObject<Dictionary<string, object>>(r.ReadToEnd())!;
             }
 
-            using (StreamReader r = new StreamReader(_config["path_model"] + "entity-relations.json")) {
-                _relations = (Dictionary<string, object>)JsonConvert.DeserializeObject(r.ReadToEnd());
+            using (StreamReader r = new StreamReader(_config["path_model"] + "entity-relations.json"))
+            {
+                _relations = JsonConvert.DeserializeObject<Dictionary<string, object>>(r.ReadToEnd())!;
             }
 
             using (StreamReader r = new StreamReader(_config["path_model"] + "_entities.json"))
             {
-                _entities_config = (Dictionary<string, object>)JsonConvert.DeserializeObject(r.ReadToEnd());
+                _entities_config = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(r.ReadToEnd())!;
             }
 
             if (File.Exists(_config["path_model"] + "entities.json"))
             {
                 using (StreamReader r = new StreamReader(_config["path_model"] + "entities.json"))
                 {
-                    Dictionary<string, object> ee = (Dictionary<string, object>)JsonConvert.DeserializeObject(r.ReadToEnd());
-                    foreach (KeyValuePair<string, object> e in ee)
+                    Dictionary<string, Dictionary<string, object>> ee = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(r.ReadToEnd());
+                    foreach (KeyValuePair<string, Dictionary<string, object>> e in ee)
                     {
                         if (_entities_config.ContainsKey(e.Key))
                         {
                             List<Dictionary<string, object>> p = new();
                             p.Add((Dictionary<string, object>)_entities_config[e.Key]);
-                            p.Add((Dictionary<string, object>)ee[e.Key]);
-                            _entities_config[e.Key] = Utils.merge_dicts(p);
+                            p.Add(ee[e.Key]);
+                            _entities_config[e.Key] = Utils.MergeDicts(p);
                         }
                     }
                 }
 
             }
+        }
     }
 
 

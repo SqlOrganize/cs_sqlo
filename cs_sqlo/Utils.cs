@@ -8,7 +8,7 @@ namespace cs_sqlo
 {
     public static class Utils
     {
-        public static Dictionary<K, V> merge_dicts<K, V>(IEnumerable<Dictionary<K, V>> dictionaries)
+        public static Dictionary<K, V> MergeDicts<K, V>(IEnumerable<Dictionary<K, V>> dictionaries) where K : notnull    
         {
             Dictionary<K, V> result = new Dictionary<K, V>();
 

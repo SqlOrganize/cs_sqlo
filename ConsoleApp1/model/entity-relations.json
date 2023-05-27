@@ -1,0 +1,232 @@
+{
+  "alumno": {
+    "plan": {"field_name":"plan", "entity_name":"plan", "parent_id":null},
+    "resolucion_inscripcion": {"field_name":"resolucion_inscripcion", "entity_name":"resolucion", "parent_id":null},
+    "persona": {"field_name":"persona", "entity_name":"persona", "parent_id":null},
+    "domicilio": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"persona"}
+  },
+
+  "alumno_comision": {
+    "comision": {"field_name":"comision", "entity_name":"comision", "parent_id":null},
+    "sede": {"field_name":"sede", "entity_name":"sede", "parent_id":"comision"},
+    "domicilio": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"sede"},
+    "tipo_sede": {"field_name":"tipo_sede", "entity_name":"tipo_sede", "parent_id":"sede"},
+    "centro_educativo": {"field_name":"centro_educativo", "entity_name":"centro_educativo", "parent_id":"sede"},
+    "domicilio_ce": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"centro_educativo"},
+    "modalidad": {"field_name":"modalidad", "entity_name":"modalidad", "parent_id":"comision"},
+    "planificacion": {"field_name":"planificacion", "entity_name":"planificacion", "parent_id":"comision"},
+    "plan": {"field_name":"plan", "entity_name":"plan", "parent_id":"planificacion"},
+    "calendario": {"field_name":"calendario", "entity_name":"calendario", "parent_id":"comision"},
+    "alumno": {"field_name":"alumno", "entity_name":"alumno", "parent_id":null},
+    "plan_alu": {"field_name":"plan", "entity_name":"plan", "parent_id":"alumno"},
+    "resolucion_inscripcion": {"field_name":"resolucion_inscripcion", "entity_name":"resolucion", "parent_id":"alumno"},
+    "persona": {"field_name":"persona", "entity_name":"persona", "parent_id":"alumno"},
+    "domicilio_per": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"persona"}
+  },
+
+  "asignacion_planilla_docente": {
+    "planilla_docente": {"field_name":"planilla_docente", "entity_name":"planilla_docente", "parent_id":null},
+    "toma": {"field_name":"toma", "entity_name":"toma", "parent_id":null},
+    "curso": {"field_name":"curso", "entity_name":"curso", "parent_id":"toma"},
+    "comision": {"field_name":"comision", "entity_name":"comision", "parent_id":"curso"},
+    "sede": {"field_name":"sede", "entity_name":"sede", "parent_id":"comision"},
+    "domicilio": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"sede"},
+    "tipo_sede": {"field_name":"tipo_sede", "entity_name":"tipo_sede", "parent_id":"sede"},
+    "centro_educativo": {"field_name":"centro_educativo", "entity_name":"centro_educativo", "parent_id":"sede"},
+    "domicilio_ce": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"centro_educativo"},
+    "modalidad": {"field_name":"modalidad", "entity_name":"modalidad", "parent_id":"comision"},
+    "planificacion": {"field_name":"planificacion", "entity_name":"planificacion", "parent_id":"comision"},
+    "plan": {"field_name":"plan", "entity_name":"plan", "parent_id":"planificacion"},
+    "calendario": {"field_name":"calendario", "entity_name":"calendario", "parent_id":"comision"},
+    "asignatura": {"field_name":"asignatura", "entity_name":"asignatura", "parent_id":"curso"},
+    "docente": {"field_name":"docente", "entity_name":"persona", "parent_id":"toma"},
+    "domicilio_doc": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"docente"},
+    "reemplazo": {"field_name":"reemplazo", "entity_name":"persona", "parent_id":"toma"},
+    "domicilio_ree": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"reemplazo"},
+    "planilla_docente_tom": {"field_name":"planilla_docente", "entity_name":"planilla_docente", "parent_id":"toma"}
+  },
+
+  "calificacion": {
+    "curso": {"field_name":"curso", "entity_name":"curso", "parent_id":null},
+    "comision": {"field_name":"comision", "entity_name":"comision", "parent_id":"curso"},
+    "sede": {"field_name":"sede", "entity_name":"sede", "parent_id":"comision"},
+    "domicilio": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"sede"},
+    "tipo_sede": {"field_name":"tipo_sede", "entity_name":"tipo_sede", "parent_id":"sede"},
+    "centro_educativo": {"field_name":"centro_educativo", "entity_name":"centro_educativo", "parent_id":"sede"},
+    "domicilio_ce": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"centro_educativo"},
+    "modalidad": {"field_name":"modalidad", "entity_name":"modalidad", "parent_id":"comision"},
+    "planificacion": {"field_name":"planificacion", "entity_name":"planificacion", "parent_id":"comision"},
+    "plan": {"field_name":"plan", "entity_name":"plan", "parent_id":"planificacion"},
+    "calendario": {"field_name":"calendario", "entity_name":"calendario", "parent_id":"comision"},
+    "asignatura": {"field_name":"asignatura", "entity_name":"asignatura", "parent_id":"curso"},
+    "alumno": {"field_name":"alumno", "entity_name":"alumno", "parent_id":null},
+    "plan_alu": {"field_name":"plan", "entity_name":"plan", "parent_id":"alumno"},
+    "resolucion_inscripcion": {"field_name":"resolucion_inscripcion", "entity_name":"resolucion", "parent_id":"alumno"},
+    "persona": {"field_name":"persona", "entity_name":"persona", "parent_id":"alumno"},
+    "domicilio_per": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"persona"},
+    "disposicion": {"field_name":"disposicion", "entity_name":"disposicion", "parent_id":null},
+    "asignatura_dis": {"field_name":"asignatura", "entity_name":"asignatura", "parent_id":"disposicion"},
+    "planificacion_dis": {"field_name":"planificacion", "entity_name":"planificacion", "parent_id":"disposicion"},
+    "plan_pla": {"field_name":"plan", "entity_name":"plan", "parent_id":"planificacion_dis"}
+  },
+
+  "centro_educativo": {
+    "domicilio": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":null}
+  },
+
+  "comision": {
+    "sede": {"field_name":"sede", "entity_name":"sede", "parent_id":null},
+    "domicilio": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"sede"},
+    "tipo_sede": {"field_name":"tipo_sede", "entity_name":"tipo_sede", "parent_id":"sede"},
+    "centro_educativo": {"field_name":"centro_educativo", "entity_name":"centro_educativo", "parent_id":"sede"},
+    "domicilio_ce": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"centro_educativo"},
+    "modalidad": {"field_name":"modalidad", "entity_name":"modalidad", "parent_id":null},
+    "planificacion": {"field_name":"planificacion", "entity_name":"planificacion", "parent_id":null},
+    "plan": {"field_name":"plan", "entity_name":"plan", "parent_id":"planificacion"},
+    "calendario": {"field_name":"calendario", "entity_name":"calendario", "parent_id":null}
+  },
+
+  "comision_relacionada": {
+    "comision": {"field_name":"comision", "entity_name":"comision", "parent_id":null},
+    "sede": {"field_name":"sede", "entity_name":"sede", "parent_id":"comision"},
+    "domicilio": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"sede"},
+    "tipo_sede": {"field_name":"tipo_sede", "entity_name":"tipo_sede", "parent_id":"sede"},
+    "centro_educativo": {"field_name":"centro_educativo", "entity_name":"centro_educativo", "parent_id":"sede"},
+    "domicilio_ce": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"centro_educativo"},
+    "modalidad": {"field_name":"modalidad", "entity_name":"modalidad", "parent_id":"comision"},
+    "planificacion": {"field_name":"planificacion", "entity_name":"planificacion", "parent_id":"comision"},
+    "plan": {"field_name":"plan", "entity_name":"plan", "parent_id":"planificacion"},
+    "calendario": {"field_name":"calendario", "entity_name":"calendario", "parent_id":"comision"},
+    "relacion": {"field_name":"relacion", "entity_name":"comision", "parent_id":null},
+    "sede_rel": {"field_name":"sede", "entity_name":"sede", "parent_id":"relacion"},
+    "domicilio_sed": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"sede_rel"},
+    "tipo_sede_sed": {"field_name":"tipo_sede", "entity_name":"tipo_sede", "parent_id":"sede_rel"},
+    "centro_educativo_sed": {"field_name":"centro_educativo", "entity_name":"centro_educativo", "parent_id":"sede_rel"},
+    "domicilio_ce1": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"centro_educativo_sed"},
+    "modalidad_rel": {"field_name":"modalidad", "entity_name":"modalidad", "parent_id":"relacion"},
+    "planificacion_rel": {"field_name":"planificacion", "entity_name":"planificacion", "parent_id":"relacion"},
+    "plan_pla": {"field_name":"plan", "entity_name":"plan", "parent_id":"planificacion_rel"},
+    "calendario_rel": {"field_name":"calendario", "entity_name":"calendario", "parent_id":"relacion"}
+  },
+
+  "contralor": {
+    "planilla_docente": {"field_name":"planilla_docente", "entity_name":"planilla_docente", "parent_id":null}
+  },
+
+  "curso": {
+    "comision": {"field_name":"comision", "entity_name":"comision", "parent_id":null},
+    "sede": {"field_name":"sede", "entity_name":"sede", "parent_id":"comision"},
+    "domicilio": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"sede"},
+    "tipo_sede": {"field_name":"tipo_sede", "entity_name":"tipo_sede", "parent_id":"sede"},
+    "centro_educativo": {"field_name":"centro_educativo", "entity_name":"centro_educativo", "parent_id":"sede"},
+    "domicilio_ce": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"centro_educativo"},
+    "modalidad": {"field_name":"modalidad", "entity_name":"modalidad", "parent_id":"comision"},
+    "planificacion": {"field_name":"planificacion", "entity_name":"planificacion", "parent_id":"comision"},
+    "plan": {"field_name":"plan", "entity_name":"plan", "parent_id":"planificacion"},
+    "calendario": {"field_name":"calendario", "entity_name":"calendario", "parent_id":"comision"},
+    "asignatura": {"field_name":"asignatura", "entity_name":"asignatura", "parent_id":null}
+  },
+
+  "designacion": {
+    "cargo": {"field_name":"cargo", "entity_name":"cargo", "parent_id":null},
+    "sede": {"field_name":"sede", "entity_name":"sede", "parent_id":null},
+    "domicilio": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"sede"},
+    "tipo_sede": {"field_name":"tipo_sede", "entity_name":"tipo_sede", "parent_id":"sede"},
+    "centro_educativo": {"field_name":"centro_educativo", "entity_name":"centro_educativo", "parent_id":"sede"},
+    "domicilio_ce": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"centro_educativo"},
+    "persona": {"field_name":"persona", "entity_name":"persona", "parent_id":null},
+    "domicilio_per": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"persona"}
+  },
+
+  "detalle_persona": {
+    "archivo": {"field_name":"archivo", "entity_name":"file", "parent_id":null},
+    "persona": {"field_name":"persona", "entity_name":"persona", "parent_id":null},
+    "domicilio": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"persona"}
+  },
+
+  "disposicion": {
+    "asignatura": {"field_name":"asignatura", "entity_name":"asignatura", "parent_id":null},
+    "planificacion": {"field_name":"planificacion", "entity_name":"planificacion", "parent_id":null},
+    "plan": {"field_name":"plan", "entity_name":"plan", "parent_id":"planificacion"}
+  },
+
+  "disposicion_pendiente": {
+    "disposicion": {"field_name":"disposicion", "entity_name":"disposicion", "parent_id":null},
+    "asignatura": {"field_name":"asignatura", "entity_name":"asignatura", "parent_id":"disposicion"},
+    "planificacion": {"field_name":"planificacion", "entity_name":"planificacion", "parent_id":"disposicion"},
+    "plan": {"field_name":"plan", "entity_name":"plan", "parent_id":"planificacion"},
+    "alumno": {"field_name":"alumno", "entity_name":"alumno", "parent_id":null},
+    "plan_alu": {"field_name":"plan", "entity_name":"plan", "parent_id":"alumno"},
+    "resolucion_inscripcion": {"field_name":"resolucion_inscripcion", "entity_name":"resolucion", "parent_id":"alumno"},
+    "persona": {"field_name":"persona", "entity_name":"persona", "parent_id":"alumno"},
+    "domicilio": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"persona"}
+  },
+
+  "distribucion_horaria": {
+    "disposicion": {"field_name":"disposicion", "entity_name":"disposicion", "parent_id":null},
+    "asignatura": {"field_name":"asignatura", "entity_name":"asignatura", "parent_id":"disposicion"},
+    "planificacion": {"field_name":"planificacion", "entity_name":"planificacion", "parent_id":"disposicion"},
+    "plan": {"field_name":"plan", "entity_name":"plan", "parent_id":"planificacion"}
+  },
+
+  "email": {
+    "persona": {"field_name":"persona", "entity_name":"persona", "parent_id":null},
+    "domicilio": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"persona"}
+  },
+
+  "horario": {
+    "curso": {"field_name":"curso", "entity_name":"curso", "parent_id":null},
+    "comision": {"field_name":"comision", "entity_name":"comision", "parent_id":"curso"},
+    "sede": {"field_name":"sede", "entity_name":"sede", "parent_id":"comision"},
+    "domicilio": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"sede"},
+    "tipo_sede": {"field_name":"tipo_sede", "entity_name":"tipo_sede", "parent_id":"sede"},
+    "centro_educativo": {"field_name":"centro_educativo", "entity_name":"centro_educativo", "parent_id":"sede"},
+    "domicilio_ce": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"centro_educativo"},
+    "modalidad": {"field_name":"modalidad", "entity_name":"modalidad", "parent_id":"comision"},
+    "planificacion": {"field_name":"planificacion", "entity_name":"planificacion", "parent_id":"comision"},
+    "plan": {"field_name":"plan", "entity_name":"plan", "parent_id":"planificacion"},
+    "calendario": {"field_name":"calendario", "entity_name":"calendario", "parent_id":"comision"},
+    "asignatura": {"field_name":"asignatura", "entity_name":"asignatura", "parent_id":"curso"},
+    "dia": {"field_name":"dia", "entity_name":"dia", "parent_id":null}
+  },
+
+  "persona": {
+    "domicilio": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":null}
+  },
+
+  "planificacion": {
+    "plan": {"field_name":"plan", "entity_name":"plan", "parent_id":null}
+  },
+
+  "sede": {
+    "domicilio": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":null},
+    "tipo_sede": {"field_name":"tipo_sede", "entity_name":"tipo_sede", "parent_id":null},
+    "centro_educativo": {"field_name":"centro_educativo", "entity_name":"centro_educativo", "parent_id":null},
+    "domicilio_ce": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"centro_educativo"}
+  },
+
+  "telefono": {
+    "persona": {"field_name":"persona", "entity_name":"persona", "parent_id":null},
+    "domicilio": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"persona"}
+  },
+
+  "toma": {
+    "curso": {"field_name":"curso", "entity_name":"curso", "parent_id":null},
+    "comision": {"field_name":"comision", "entity_name":"comision", "parent_id":"curso"},
+    "sede": {"field_name":"sede", "entity_name":"sede", "parent_id":"comision"},
+    "domicilio": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"sede"},
+    "tipo_sede": {"field_name":"tipo_sede", "entity_name":"tipo_sede", "parent_id":"sede"},
+    "centro_educativo": {"field_name":"centro_educativo", "entity_name":"centro_educativo", "parent_id":"sede"},
+    "domicilio_ce": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"centro_educativo"},
+    "modalidad": {"field_name":"modalidad", "entity_name":"modalidad", "parent_id":"comision"},
+    "planificacion": {"field_name":"planificacion", "entity_name":"planificacion", "parent_id":"comision"},
+    "plan": {"field_name":"plan", "entity_name":"plan", "parent_id":"planificacion"},
+    "calendario": {"field_name":"calendario", "entity_name":"calendario", "parent_id":"comision"},
+    "asignatura": {"field_name":"asignatura", "entity_name":"asignatura", "parent_id":"curso"},
+    "docente": {"field_name":"docente", "entity_name":"persona", "parent_id":null},
+    "domicilio_doc": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"docente"},
+    "reemplazo": {"field_name":"reemplazo", "entity_name":"persona", "parent_id":null},
+    "domicilio_ree": {"field_name":"domicilio", "entity_name":"domicilio", "parent_id":"reemplazo"},
+    "planilla_docente": {"field_name":"planilla_docente", "entity_name":"planilla_docente", "parent_id":null}
+  }
+}

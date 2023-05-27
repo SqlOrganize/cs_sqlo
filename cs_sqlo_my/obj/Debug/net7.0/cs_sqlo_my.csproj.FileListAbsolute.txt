@@ -1,0 +1,15 @@
+C:\xampp\htdocs\cs_sqlo\cs_sqlo_my\obj\Debug\net7.0\cs_sqlo_my.csproj.AssemblyReference.cache
+C:\xampp\htdocs\cs_sqlo\cs_sqlo_my\obj\Debug\net7.0\cs_sqlo_my.GeneratedMSBuildEditorConfig.editorconfig
+C:\xampp\htdocs\cs_sqlo\cs_sqlo_my\obj\Debug\net7.0\cs_sqlo_my.AssemblyInfoInputs.cache
+C:\xampp\htdocs\cs_sqlo\cs_sqlo_my\obj\Debug\net7.0\cs_sqlo_my.AssemblyInfo.cs
+C:\xampp\htdocs\cs_sqlo\cs_sqlo_my\obj\Debug\net7.0\cs_sqlo_my.csproj.CoreCompileInputs.cache
+C:\xampp\htdocs\cs_sqlo\cs_sqlo_my\bin\Debug\net7.0\cs_sqlo_my.deps.json
+C:\xampp\htdocs\cs_sqlo\cs_sqlo_my\bin\Debug\net7.0\cs_sqlo_my.dll
+C:\xampp\htdocs\cs_sqlo\cs_sqlo_my\bin\Debug\net7.0\cs_sqlo_my.pdb
+C:\xampp\htdocs\cs_sqlo\cs_sqlo_my\bin\Debug\net7.0\cs_sqlo.dll
+C:\xampp\htdocs\cs_sqlo\cs_sqlo_my\bin\Debug\net7.0\cs_sqlo.pdb
+C:\xampp\htdocs\cs_sqlo\cs_sqlo_my\obj\Debug\net7.0\cs_sqlo_my.csproj.CopyComplete
+C:\xampp\htdocs\cs_sqlo\cs_sqlo_my\obj\Debug\net7.0\cs_sqlo_my.dll
+C:\xampp\htdocs\cs_sqlo\cs_sqlo_my\obj\Debug\net7.0\refint\cs_sqlo_my.dll
+C:\xampp\htdocs\cs_sqlo\cs_sqlo_my\obj\Debug\net7.0\cs_sqlo_my.pdb
+C:\xampp\htdocs\cs_sqlo\cs_sqlo_my\obj\Debug\net7.0\ref\cs_sqlo_my.dll

@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cs_sqlo", "cs_sqlo\cs_sqlo.csproj", "{5D6CF446-80F5-40D4-B956-39869597F98B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cs_sqlo", "cs_sqlo\cs_sqlo.csproj", "{5D6CF446-80F5-40D4-B956-39869597F98B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cs_sqlo_my", "cs_sqlo_my\cs_sqlo_my.csproj", "{25D0D98B-2734-4445-82AD-260D7EF4877D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cs_sqlo_my", "cs_sqlo_my\cs_sqlo_my.csproj", "{25D0D98B-2734-4445-82AD-260D7EF4877D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cs_sqlo_ss", "cs_sqlo_ss\cs_sqlo_ss.csproj", "{15DE482F-5207-495F-8353-4C908D9671F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cs_sqlo_ss", "cs_sqlo_ss\cs_sqlo_ss.csproj", "{15DE482F-5207-495F-8353-4C908D9671F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{30994DE1-2DE5-43EE-9369-BA8045B9C118}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{15DE482F-5207-495F-8353-4C908D9671F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15DE482F-5207-495F-8353-4C908D9671F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15DE482F-5207-495F-8353-4C908D9671F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30994DE1-2DE5-43EE-9369-BA8045B9C118}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30994DE1-2DE5-43EE-9369-BA8045B9C118}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30994DE1-2DE5-43EE-9369-BA8045B9C118}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30994DE1-2DE5-43EE-9369-BA8045B9C118}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
