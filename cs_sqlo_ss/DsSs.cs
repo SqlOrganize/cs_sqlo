@@ -18,9 +18,5 @@ namespace cs_sqlo_ss
         }
 
         public SqlConnection conn() => _conn;
-
-
-        
-
     }
 }
