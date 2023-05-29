@@ -69,6 +69,36 @@ namespace cs_sqlo
             _db = db;
             _name = field_name;
             _entity_name = entity_name;
+
+            public static void SubDictionaryUsingForEach(Dictionary<int, string> monthsInYear)
+            {
+                foreach (var month in monthsInYear)
+                {
+                    Console.WriteLine($"{month.Key}: {month.Value}");
+                }
+            }
+
+            Dictionary<string, object> config = _db.fields_field(entity_name, field_name);
+
+
+            foreach (KeyValuePair<string, object> c in config)
+                if (c.Key.Contains("+"))
+                {
+                    string k = c.Key.TrimEnd(new Char[] { '+' });
+                    object[]  = (object[])c.Value;
+                }
+
+            if "+" in k:
+            k = k.rstrip("+")
+                for vv in v:
+                    if vv not in config[k]:
+                        config[k].append(vv)
+            elif "-" in k:
+            k = k.rstrip("-")
+                diff = [i for i in config[k] + v if i not in config[k] or i not in v]
+                config[k] = diff
+
+            setattr(self, "_" + k, config[k])
         }
      
     }
