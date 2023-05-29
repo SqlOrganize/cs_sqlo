@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\cs_sqlo_my\cs_sqlo_my.csproj" />
+    <Folder Include="model\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="model\" />
+    <ProjectReference Include="..\cs_sqlo_ss\cs_sqlo_ss.csproj" />
   </ItemGroup>
 
 </Project>

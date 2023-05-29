@@ -1,0 +1,15 @@
+C:\projects\cs_sqlo\cs_sqlo_ss\bin\Debug\net7.0\cs_sqlo_ss.deps.json
+C:\projects\cs_sqlo\cs_sqlo_ss\bin\Debug\net7.0\cs_sqlo_ss.dll
+C:\projects\cs_sqlo\cs_sqlo_ss\bin\Debug\net7.0\cs_sqlo_ss.pdb
+C:\projects\cs_sqlo\cs_sqlo_ss\bin\Debug\net7.0\cs_sqlo.dll
+C:\projects\cs_sqlo\cs_sqlo_ss\bin\Debug\net7.0\cs_sqlo.pdb
+C:\projects\cs_sqlo\cs_sqlo_ss\obj\Debug\net7.0\cs_sqlo_ss.csproj.AssemblyReference.cache
+C:\projects\cs_sqlo\cs_sqlo_ss\obj\Debug\net7.0\cs_sqlo_ss.GeneratedMSBuildEditorConfig.editorconfig
+C:\projects\cs_sqlo\cs_sqlo_ss\obj\Debug\net7.0\cs_sqlo_ss.AssemblyInfoInputs.cache
+C:\projects\cs_sqlo\cs_sqlo_ss\obj\Debug\net7.0\cs_sqlo_ss.AssemblyInfo.cs
+C:\projects\cs_sqlo\cs_sqlo_ss\obj\Debug\net7.0\cs_sqlo_ss.csproj.CoreCompileInputs.cache
+C:\projects\cs_sqlo\cs_sqlo_ss\obj\Debug\net7.0\cs_sqlo_ss.csproj.CopyComplete
+C:\projects\cs_sqlo\cs_sqlo_ss\obj\Debug\net7.0\cs_sqlo_ss.dll
+C:\projects\cs_sqlo\cs_sqlo_ss\obj\Debug\net7.0\refint\cs_sqlo_ss.dll
+C:\projects\cs_sqlo\cs_sqlo_ss\obj\Debug\net7.0\cs_sqlo_ss.pdb
+C:\projects\cs_sqlo\cs_sqlo_ss\obj\Debug\net7.0\ref\cs_sqlo_ss.dll

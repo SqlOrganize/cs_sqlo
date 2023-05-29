@@ -1,5 +1,5 @@
 ﻿using cs_sqlo;
-using Microsoft.Data.SqlClient;
+    using Microsoft.Data.SqlClient;
 
 namespace cs_sqlo_ss
 {
@@ -14,7 +14,7 @@ namespace cs_sqlo_ss
         public DbSs(Dictionary<string, object> config) : base(config)
         {
             using SqlConnection _conn = new SqlConnection((string)config["connection_string"]);
-            _conn.Open();
+            _conn.Open();   
         }
 
         public SqlConnection conn() => _conn;

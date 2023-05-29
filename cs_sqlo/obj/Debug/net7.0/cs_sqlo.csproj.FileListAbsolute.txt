@@ -10,3 +10,15 @@ C:\xampp\htdocs\cs_sqlo\cs_sqlo\obj\Debug\net7.0\cs_sqlo.dll
 C:\xampp\htdocs\cs_sqlo\cs_sqlo\obj\Debug\net7.0\refint\cs_sqlo.dll
 C:\xampp\htdocs\cs_sqlo\cs_sqlo\obj\Debug\net7.0\cs_sqlo.pdb
 C:\xampp\htdocs\cs_sqlo\cs_sqlo\obj\Debug\net7.0\ref\cs_sqlo.dll
+C:\projects\cs_sqlo\cs_sqlo\bin\Debug\net7.0\cs_sqlo.deps.json
+C:\projects\cs_sqlo\cs_sqlo\bin\Debug\net7.0\cs_sqlo.dll
+C:\projects\cs_sqlo\cs_sqlo\bin\Debug\net7.0\cs_sqlo.pdb
+C:\projects\cs_sqlo\cs_sqlo\obj\Debug\net7.0\cs_sqlo.csproj.AssemblyReference.cache
+C:\projects\cs_sqlo\cs_sqlo\obj\Debug\net7.0\cs_sqlo.GeneratedMSBuildEditorConfig.editorconfig
+C:\projects\cs_sqlo\cs_sqlo\obj\Debug\net7.0\cs_sqlo.AssemblyInfoInputs.cache
+C:\projects\cs_sqlo\cs_sqlo\obj\Debug\net7.0\cs_sqlo.AssemblyInfo.cs
+C:\projects\cs_sqlo\cs_sqlo\obj\Debug\net7.0\cs_sqlo.csproj.CoreCompileInputs.cache
+C:\projects\cs_sqlo\cs_sqlo\obj\Debug\net7.0\cs_sqlo.dll
+C:\projects\cs_sqlo\cs_sqlo\obj\Debug\net7.0\refint\cs_sqlo.dll
+C:\projects\cs_sqlo\cs_sqlo\obj\Debug\net7.0\cs_sqlo.pdb
+C:\projects\cs_sqlo\cs_sqlo\obj\Debug\net7.0\ref\cs_sqlo.dll
