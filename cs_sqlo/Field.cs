@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace cs_sqlo
 {
-    internal class Field
+    public class Field
     {
         protected Db _db;
         protected string _name;
@@ -64,42 +64,36 @@ namespace cs_sqlo
         /* lista de valores permitidos */
         //List<object> _values;
 
-        public Field(Db db, string name, string entity_name, string field_name)
+        public Field(Db db, string entity_name, string field_name)
         {
             _db = db;
             _name = field_name;
             _entity_name = entity_name;
 
-            public static void SubDictionaryUsingForEach(Dictionary<int, string> monthsInYear)
-            {
-                foreach (var month in monthsInYear)
-                {
-                    Console.WriteLine($"{month.Key}: {month.Value}");
-                }
-            }
-
             Dictionary<string, object> config = _db.fields_field(entity_name, field_name);
-
-
-            foreach (KeyValuePair<string, object> c in config)
-                if (c.Key.Contains("+"))
-                {
-                    string k = c.Key.TrimEnd(new Char[] { '+' });
-                    object[]  = (object[])c.Value;
-                }
-
-            if "+" in k:
-            k = k.rstrip("+")
-                for vv in v:
-                    if vv not in config[k]:
-                        config[k].append(vv)
-            elif "-" in k:
-            k = k.rstrip("-")
-                diff = [i for i in config[k] + v if i not in config[k] or i not in v]
-                config[k] = diff
-
-            setattr(self, "_" + k, config[k])
+            this.SetConfig(config);
         }
-     
+
+        public string name() => this._name;
+
+        public string? alias() => this._alias;
+
+        public Entity entity() => this._db.entity(_entity_name);
+
+        public Entity entity_ref() => this._db.entity(_entity_ref_name!);
+
+        public bool is_main()
+        {
+            return this._db.entity(_entity_name).main().Contains(name());
+        }
+        public string type()
+        {
+            return _type;
+        }
+
+        public object? default_value()
+        {
+            return _default;
+        }
     }
 }

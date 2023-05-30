@@ -123,13 +123,13 @@ namespace cs_sqlo
             return (fe.ContainsKey(field_name)) ? fe[entity_name] : new Dictionary<string, object>();
         }
 
-        public string[] entity_names() => _tree.Keys.ToArray();
-        public string[] field_names(string entity_name) => fields_entity(entity_name).Keys.ToArray();
+        public List<string> entity_names() => _tree.Keys.ToList();
+        public List<string> field_names(string entity_name) => fields_entity(entity_name).Keys.ToList();
         public Dictionary<string, string> explode_field(string entity_name, string field_name)
         {
-            string[] f = field_name.Split("-");
+            List<string> f = field_name.Split("-").ToList();
 
-            if (f.Length == 2)
+            if (f.Count() == 2)
             {
                 return new Dictionary<string, string>
                 {
@@ -146,6 +146,16 @@ namespace cs_sqlo
                 { "entity_name", entity_name },
                 { "field_name", field_name },
             };
+        }
+
+        public Entity entity(string entity_name)
+        {
+            return new Entity(this, entity_name);
+        }
+
+        public Field field(string entity_name, string field_name)
+        {
+            return new Field(this, entity_name, field_name);
         }
 
         //entity(self, entity_name:str)
