@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,8 @@ namespace cs_sqlo
         */
         public static void SetValue<T>(this T sender, string propertyName, object value)
         {
-            var propertyInfo = sender!.GetType().GetProperty(propertyName);
+            var propertyInfo1 = sender!.GetType();
+            var propertyInfo = propertyInfo1.GetProperty(propertyName);
 
             if (propertyInfo is null) return;
 
@@ -52,8 +54,8 @@ namespace cs_sqlo
                 {
                     string k = c.Key.TrimEnd(new Char[] { '+' });
                     if (!config.ContainsKey(k)) config[k] = new List<object>();
-                    List<object> conf = (List<object>)config[k];
-                    foreach (object v in (List<object>)c.Value)
+                    List<object> conf = JsonConvert.DeserializeObject<List<object>>(config[k].ToString());
+                    foreach (object v in JsonConvert.DeserializeObject<List<object>>(c.Value.ToString()))
                     {
                         if (!conf.Contains(v))
                         {

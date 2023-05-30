@@ -16,7 +16,6 @@ namespace cs_sqlo
             {"APPROX","APPROX"},
             {"APPROX_LEFT","APPROX_LEFT"},
             {"APPROX_RIGHT","APPROX_RIGHT"},
-            {"NONAPPROX","NONAPPROX"},
             {"AND","AND"},
             {"OR","OR"},
             {"$","$"}, //prefijo que indica field (utilizado para indicar concatenacion AND en condiciones)

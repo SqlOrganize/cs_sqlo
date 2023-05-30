@@ -1,7 +1,9 @@
 ﻿
 
 
+using cs_sqlo;
 using cs_sqlo_ss;
+using System.ComponentModel;
 
 Dictionary<string, object> config = new Dictionary<string, object>()
  {
@@ -13,5 +15,10 @@ Dictionary<string, object> config = new Dictionary<string, object>()
 
 //var db = new DbMy(config);
 DbSs db = new(config);
-Console.WriteLine(db.ToString());
+Entity alumno = db.entity("alumno");
+Console.WriteLine(alumno._nf.Count);
+for (int i = 0; i < alumno._nf.Count; i++)
+{
+    Console.WriteLine(alumno._nf[i]);
+}
 

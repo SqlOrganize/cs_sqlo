@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,59 +9,76 @@ namespace cs_sqlo
 {
     public class Entity
     {
-        protected Db _db;
-        protected string _name;
-        protected string _alias;
-        protected string? _schema;
+        public Db _db;
+        public string _name;
+        public string _alias;
+        public string? _schema;
+        public string _Nnn;
+        public string Nnn
+        {
+            get => _Nnn;
+            set
+            {
+                {
+                    _Nnn = value;
+                }
+            }
+        }
 
-        protected List<string> _pk = new();
-        protected List<string> _nf = new();
-        protected List<string> _mo = new();
-        protected List<string> _oo = new();
+
+        public List<string> _pk = new();
+        public List<string> _nf = new();
+        public List<string> _mo = new();
+        public List<string> _oo = new();
 
         /* 
         array dinamico para identificar univocamente a una entidad en un momento determinado
         @example
         identifier = ["fecha_anio", "fecha_semestre","persona-numero_documento"]
         */
-        protected List<string> _identifier = new();
+        public List<string> _identifier = new();
 
         /*
         Valores por defecto para ordenamiento
         @example ["field1"=>"asc","field2"=>"desc",...];
         */
-        protected Dictionary<string, string> _order_default = new();
+        public Dictionary<string, string> _order_default = new();
 
         /*
         Valores no administrables
         @example ["field1","field2",...]
         */
-        protected List<string> _no_admin = new();
+        public List<string> _no_admin = new();
 
         /*
         Valores principales
         @example ["field1","field2",...]
         */
-        protected List<string> _main = new() { "id" };
+        public List<string> _main = new() { "id" };
 
         /*
         Valores unicos
         Una entidad puede tener varios campos que determinen un valor unico
         @example ["field1","field2",...]
         */
-        protected List<string> _unique = new() { "id" };
+        public List<string> _unique = new() { "id" };
 
         /*
         Valores unicos multiples
         Solo puede especificarse un juego de campos unique_multiple
         */
-        protected List<string> _unique_multiple = new();
+        public List<string> _unique_multiple = new();
 
         public Entity(Db db, string entity_name)
         {
             _db = db;
             _name = entity_name;
+            Nnn = "something";
             Dictionary<string, object> config = _db.entities_entity(entity_name);
+            var propertyInfo1 = this.GetType();
+            var propertyInfoA = propertyInfo1.GetProperty("_name", BindingFlags.NonPublic);
+            var propertyInfoN = propertyInfo1.GetProperty("Nnn");
+
             this.SetConfig(config);
         }
 
