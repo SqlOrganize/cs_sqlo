@@ -6,10 +6,30 @@ namespace cs_sqlo
 {
     public class Db
     {
+        public Dictionary<string, string> options = new()
+        {
+            {"EQUAL","="},
+            {"NONEQUAL","!="},
+            {"UNDEFINED","~"},
+            {"DEFAULT","DEFAULT"},
+            {"NONAPPROX","NONAPPROX"}, //comparacion apriximadamente distinto
+            {"APPROX","APPROX"},
+            {"APPROX_LEFT","APPROX_LEFT"},
+            {"APPROX_RIGHT","APPROX_RIGHT"},
+            {"NONAPPROX","NONAPPROX"},
+            {"AND","AND"},
+            {"OR","OR"},
+            {"$","$"}, //prefijo que indica field (utilizado para indicar concatenacion AND en condiciones)
+            {"LESS","<"},
+            {"LESS_EQUAL","<="},
+            {"GREATER",">"},
+            {"GREATER_EQUAL",">="},
+        };
+    
         protected Dictionary<string, object>? _config;
-        protected Dictionary<string, object> _entity = new();
+        protected Dictionary<string, Entity> _entity = new();
         protected Dictionary<string, object> _tools = new();
-        protected Dictionary<string, object> _field = new();
+        protected Dictionary<string, Dictionary<string, Field>> _field = new();
         protected Dictionary<string, object> _mapping = new();
         protected Dictionary<string, object> _condition = new();
 
@@ -63,7 +83,7 @@ namespace cs_sqlo
                         if (_entities.ContainsKey(e.Key))
                         {
                             List<Dictionary<string, object>> p = new();
-                            p.Add((Dictionary<string, object>)_entities[e.Key]);
+                            p.Add(_entities[e.Key]);
                             p.Add(ee[e.Key]);
                             _entities[e.Key] = Utils.MergeDicts(p);
                         }
@@ -150,16 +170,23 @@ namespace cs_sqlo
 
         public Entity entity(string entity_name)
         {
-            return new Entity(this, entity_name);
+            if (!_entity.ContainsKey(entity_name))
+                _entity[entity_name] = new Entity(this, entity_name);
+
+            return _entity[entity_name];
         }
 
         public Field field(string entity_name, string field_name)
         {
-            return new Field(this, entity_name, field_name);
+            if (!_field.ContainsKey(entity_name))
+                _field[entity_name] = new();
+
+            if (!_field[entity_name].ContainsKey(field_name))
+                _field[entity_name][field_name] = new Field(this, entity_name, field_name);
+
+            return _field[entity_name][field_name];
         }
 
-        //entity(self, entity_name:str)
-        //field(self, entity_name, field_name)
         //field_by_id(self, entity_name:str, field_id:str) 
         //tools(self, entity_name)
         //mapping(self, entity_name: str, field_id:str = "")

@@ -3,9 +3,8 @@
 
 namespace cs_sqlo_ss
 {
-    public class DbSs: Db
+    public class DbSs : Db
     {
-
         SqlConnection _conn;
 
         /*
