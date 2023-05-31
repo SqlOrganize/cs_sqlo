@@ -1,0 +1,42 @@
+{
+  "id": {
+    "field_type": "pk",
+    "default": null,
+    "alias": "id",
+    "entity_name": "distribucion_horaria",
+    "type": "str",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "horas_catedra": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "hc",
+    "entity_name": "distribucion_horaria",
+    "type": "int",  
+    "length": 10,
+    "name": "horas_catedra"
+  },
+
+  "dia": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "dia",
+    "entity_name": "distribucion_horaria",
+    "type": "int",  
+    "length": 10,
+    "name": "dia"
+  },
+
+  "disposicion": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "dis",
+    "entity_name": "distribucion_horaria",
+    "entity_ref_name": "disposicion",  
+    "type": "str",  
+    "length": 45,
+    "name": "disposicion"
+  }
+}

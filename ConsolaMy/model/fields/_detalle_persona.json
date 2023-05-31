@@ -1,0 +1,81 @@
+{
+  "id": {
+    "field_type": "pk",
+    "default": null,
+    "alias": "id",
+    "entity_name": "detalle_persona",
+    "type": "str",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "descripcion": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "des",
+    "entity_name": "detalle_persona",
+    "type": "str",  
+    "length": 65535,
+    "name": "descripcion"
+  },
+
+  "archivo": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "arc",
+    "entity_name": "detalle_persona",
+    "entity_ref_name": "file",  
+    "type": "str",  
+    "length": 45,
+    "name": "archivo"
+  },
+
+  "creado": {
+    "field_type": "nf",
+    "default": "current_timestamp()",
+    "alias": "cre",
+    "entity_name": "detalle_persona",
+    "type": "datetime",  
+    "name": "creado"
+  },
+
+  "persona": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "per",
+    "entity_name": "detalle_persona",
+    "entity_ref_name": "persona",  
+    "type": "str",  
+    "length": 45,
+    "name": "persona"
+  },
+
+  "fecha": {
+    "field_type": "nf",
+    "default": "curdate()",
+    "alias": "fec",
+    "entity_name": "detalle_persona",
+    "type": "date",  
+    "name": "fecha"
+  },
+
+  "tipo": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "tip",
+    "entity_name": "detalle_persona",
+    "type": "str",  
+    "length": 255,
+    "name": "tipo"
+  },
+
+  "asunto": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "asu",
+    "entity_name": "detalle_persona",
+    "type": "str",  
+    "length": 255,
+    "name": "asunto"
+  }
+}

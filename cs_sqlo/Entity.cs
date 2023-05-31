@@ -9,93 +9,89 @@ namespace cs_sqlo
 {
     public class Entity
     {
-        public Db _db;
-        public string _name;
-        public string _alias;
-        public string? _schema;
-        public string _Nnn;
-        public string Nnn
-        {
-            get => _Nnn;
-            set
-            {
-                {
-                    _Nnn = value;
-                }
-            }
-        }
+        public Db db { get; }
+        
+        /*
+        Es necesario que se defina como propiedad con get y set, para poder 
+        invocar dinamicamente al atributo mediante this!.GetType().GetProperty(name);
+        */
+        public string name { get; set; }
+        
+        public string alias { get; set; }
 
+        public string? schema { get; set;  }
 
-        public List<string> _pk = new();
-        public List<string> _nf = new();
-        public List<string> _mo = new();
-        public List<string> _oo = new();
+        public List<string> pk { get; set; }
+        public List<string> nf { get; set; }
+        public List<string> mo { get; set; }
+        public List<string> oo { get; set; }
 
         /* 
         array dinamico para identificar univocamente a una entidad en un momento determinado
         @example
         identifier = ["fecha_anio", "fecha_semestre","persona-numero_documento"]
         */
-        public List<string> _identifier = new();
+        public List<string> identifier { get; set; }
 
         /*
         Valores por defecto para ordenamiento
         @example ["field1"=>"asc","field2"=>"desc",...];
         */
-        public Dictionary<string, string> _order_default = new();
+        public Dictionary<string, string> order_default { get; set; }
 
         /*
         Valores no administrables
         @example ["field1","field2",...]
         */
-        public List<string> _no_admin = new();
+        public List<string> no_admin { get; set; }
 
         /*
         Valores principales
         @example ["field1","field2",...]
         */
-        public List<string> _main = new() { "id" };
+        public List<string> main { get; set; }
 
         /*
         Valores unicos
         Una entidad puede tener varios campos que determinen un valor unico
         @example ["field1","field2",...]
         */
-        public List<string> _unique = new() { "id" };
+        public List<string> unique { get; set; }
 
         /*
         Valores unicos multiples
         Solo puede especificarse un juego de campos unique_multiple
         */
-        public List<string> _unique_multiple = new();
+        public List<string> unique_multiple { get; set; }
 
-        public Entity(Db db, string entity_name)
+        public Entity(Db _db, string entity_name)
         {
-            _db = db;
-            _name = entity_name;
-            Nnn = "something";
-            Dictionary<string, object> config = _db.entities_entity(entity_name);
-            var propertyInfo1 = this.GetType();
-            var propertyInfoA = propertyInfo1.GetProperty("_name", BindingFlags.NonPublic);
-            var propertyInfoN = propertyInfo1.GetProperty("Nnn");
-
+            db = _db;
+            name = entity_name;
+            pk = new();
+            nf = new();
+            mo = new();
+            oo = new();
+            identifier = new();
+            order_default = new();
+            no_admin = new();
+            main = new() { "id" };
+            unique = new() { "id" };
+            unique_multiple = new();
+            Dictionary<string, object> config = db.entities_entity(entity_name);
             this.SetConfig(config);
         }
 
-        public string name() => _name;
-        public string alias() => _alias;
-        public string schema_() => String.IsNullOrEmpty(_schema) ? _schema : "";
-        public string schema() => _schema;
-        public string schema_name() => schema() + name();
-        public string schema_name_alias() => schema() + name() + " AS " + alias();
-        public List<string> identifier() => _identifier;
-
+        public string schema_ => String.IsNullOrEmpty(schema) ? schema : "";
+        public string schema_name => schema + name;
+        public string schema_name_alias => schema + name + " AS " + alias;
+        
         protected List<Field> _fields(List<string> field_names)
         {
             List<Field> fields = new();
             foreach (string field_name in field_names)
             {
-                fields.Add(_db.field(_name, field_name));
+                fields.Add(db.field(name, field_name));
             }
 
             return fields;
@@ -105,50 +101,51 @@ namespace cs_sqlo
         /*
         fields no fk
         */
-        public List<Field> nf() => _fields(_nf);
+        public List<Field> fields_nf() => _fields(nf);
 
         /*
         fields many to one
         */
-        public List<Field> mo() => _fields(_mo);
+        public List<Field> fields_mo() => _fields(mo);
 
         /*
         fields one to one (local fk)
         */
-        public List<Field> oo() => _fields(_oo);
+        public List<Field> fields_oo() => _fields(oo);
 
         /*
         fields fk (mo + oo)
         */
-        public List<Field> fk() => mo().Concat(oo()).ToList();
+        public List<Field> fields_fk() => fields_mo().Concat(fields_oo()).ToList();
 
         /*
-        all fields except pk"
+        all fields except pk
         */
-        public List<Field> fields_no_pk(List<string> field_names) => nf().Concat(mo()).ToList().Concat(oo()).ToList();
+        public List<Field> fields_no_pk() => fields_nf().Concat(fields_mo()).ToList().Concat(fields_oo()).ToList();
 
-        public List<Field> fields(List<string> field_names) => nf().Concat(mo()).ToList().Concat(oo()).ToList();
+        public List<Field> fields() => fields_nf().Concat(fields_mo()).ToList().Concat(fields_oo()).ToList();
 
         /*
         fields one to many
         its neccesary to iterate over all entities
         */
-        public List<Field> om() {
-            List<Field> fields = new();
+        public List<Field> fields_om()
+        {
+                List<Field> fields = new();
 
-            foreach (string entity_name in _db.entity_names())
-            {
-                Entity e = _db.entity(entity_name);
-                foreach (Field f in e.mo())
+                foreach (string entity_name in db.entity_names())
                 {
-                    if (f.entity_ref().name() == this.name())
+                    Entity e = db.entity(entity_name);
+                    foreach (Field f in e.fields_mo())
                     {
-                        fields.Add(f);
+                        if (f.entity_ref().name == this.name)
+                        {
+                            fields.Add(f);
+                        }
                     }
                 }
-            }
 
-            return fields;
+                return fields;
         }
 
         /*
@@ -156,23 +153,23 @@ namespace cs_sqlo
         fk pointed to entity outside
         its neccesary to iterate over all entities
         */
-        public List<Field> oon()
+        public List<Field>? fields_oon()
         {
-            List<Field> fields = new();
+                List<Field> fields = new();
 
-            foreach (string entity_name in _db.entity_names())
-            {
-                Entity e = _db.entity(entity_name);
-                foreach (Field f in e.oo())
+                foreach (string entity_name in db.entity_names())
                 {
-                    if (f.entity_ref().name() == this.name())
+                    Entity e = db.entity(entity_name);
+                    foreach (Field f in e.fields_oo())
                     {
-                        fields.Add(f);
+                        if (f.entity_ref().name == this.name)
+                        {
+                            fields.Add(f);
+                        }
                     }
                 }
-            }
 
-            return fields;
+                return fields;
         }
 
         /*
@@ -180,16 +177,7 @@ namespace cs_sqlo
         fk pointed to entity outside
         its neccesary to iterate over all entities
         */
-        public List<Field> fref() => om().Concat(oon()).ToList();
+        public List<Field>? fields_ref() => fields_om().Concat(fields_oon()).ToList();
 
-        public Dictionary<string, string> order_default() => _order_default;
-
-        public List<string> field_names() => _db.field_names(name());
-
-        public List<string> unique() => _unique;
-
-        public List<string> unique_multiple() => _unique_multiple;
-
-        public List<string> main() => _main;
     }
 }

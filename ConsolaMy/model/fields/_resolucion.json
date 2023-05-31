@@ -1,0 +1,40 @@
+{
+  "id": {
+    "field_type": "pk",
+    "default": null,
+    "alias": "id",
+    "entity_name": "resolucion",
+    "type": "str",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "numero": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "num",
+    "entity_name": "resolucion",
+    "type": "str",  
+    "length": 255,
+    "name": "numero"
+  },
+
+  "anio": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "ani",
+    "entity_name": "resolucion",
+    "type": "year",  
+    "name": "anio"
+  },
+
+  "tipo": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "tip",
+    "entity_name": "resolucion",
+    "type": "str",  
+    "length": 255,
+    "name": "tipo"
+  }
+}

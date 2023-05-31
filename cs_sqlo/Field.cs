@@ -84,7 +84,7 @@ namespace cs_sqlo
 
         public bool is_main()
         {
-            return this._db.entity(_entity_name).main().Contains(name());
+            return this._db.entity(_entity_name).main.Contains(name());
         }
         public string type()
         {

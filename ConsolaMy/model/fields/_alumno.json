@@ -1,0 +1,272 @@
+{
+  "id": {
+    "field_type": "pk",
+    "default": null,
+    "alias": "id",
+    "entity_name": "alumno",
+    "type": "str",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "anio_ingreso": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "ai",
+    "entity_name": "alumno",
+    "type": "str",  
+    "length": 45,
+    "name": "anio_ingreso"
+  },
+
+  "observaciones": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "obs",
+    "entity_name": "alumno",
+    "type": "str",  
+    "length": 65535,
+    "name": "observaciones"
+  },
+
+  "persona": {
+    "field_type": "oo",
+    "default": null,
+    "alias": "per",
+    "entity_name": "alumno",
+    "entity_ref_name": "persona",  
+    "type": "str",  
+    "length": 45,
+    "name": "persona"
+  },
+
+  "estado_inscripcion": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "ei",
+    "entity_name": "alumno",
+    "type": "str",  
+    "length": 45,
+    "name": "estado_inscripcion"
+  },
+
+  "fecha_titulacion": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "ft",
+    "entity_name": "alumno",
+    "type": "date",  
+    "name": "fecha_titulacion"
+  },
+
+  "plan": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "pla",
+    "entity_name": "alumno",
+    "entity_ref_name": "plan",  
+    "type": "str",  
+    "length": 45,
+    "name": "plan"
+  },
+
+  "resolucion_inscripcion": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "ri",
+    "entity_name": "alumno",
+    "entity_ref_name": "resolucion",  
+    "type": "str",  
+    "length": 45,
+    "name": "resolucion_inscripcion"
+  },
+
+  "anio_inscripcion": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "aia",
+    "entity_name": "alumno",
+    "type": "int",  
+    "length": 1,
+    "name": "anio_inscripcion"
+  },
+
+  "semestre_inscripcion": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "si",
+    "entity_name": "alumno",
+    "type": "int",  
+    "length": 1,
+    "name": "semestre_inscripcion"
+  },
+
+  "semestre_ingreso": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "sia",
+    "entity_name": "alumno",
+    "type": "int",  
+    "length": 1,
+    "name": "semestre_ingreso"
+  },
+
+  "adeuda_legajo": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "al",
+    "entity_name": "alumno",
+    "type": "str",  
+    "length": 255,
+    "name": "adeuda_legajo"
+  },
+
+  "adeuda_deudores": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "ad",
+    "entity_name": "alumno",
+    "type": "str",  
+    "length": 255,
+    "name": "adeuda_deudores"
+  },
+
+  "documentacion_inscripcion": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "di",
+    "entity_name": "alumno",
+    "type": "str",  
+    "length": 255,
+    "name": "documentacion_inscripcion"
+  },
+
+  "anio_inscripcion_completo": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "aic",
+    "entity_name": "alumno",
+    "type": "bool",  
+    "length": 1,
+    "name": "anio_inscripcion_completo"
+  },
+
+  "establecimiento_inscripcion": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "eia",
+    "entity_name": "alumno",
+    "type": "str",  
+    "length": 255,
+    "name": "establecimiento_inscripcion"
+  },
+
+  "libro_folio": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "lf",
+    "entity_name": "alumno",
+    "type": "str",  
+    "length": 255,
+    "name": "libro_folio"
+  },
+
+  "libro": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "lib",
+    "entity_name": "alumno",
+    "type": "str",  
+    "length": 45,
+    "name": "libro"
+  },
+
+  "folio": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "fol",
+    "entity_name": "alumno",
+    "type": "str",  
+    "length": 45,
+    "name": "folio"
+  },
+
+  "comentarios": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "com",
+    "entity_name": "alumno",
+    "type": "str",  
+    "length": 65535,
+    "name": "comentarios"
+  },
+
+  "tiene_dni": {
+    "field_type": "nf",
+    "default": "0",
+    "alias": "td",
+    "entity_name": "alumno",
+    "type": "bool",  
+    "length": 1,
+    "name": "tiene_dni"
+  },
+
+  "tiene_constancia": {
+    "field_type": "nf",
+    "default": "0",
+    "alias": "tc",
+    "entity_name": "alumno",
+    "type": "bool",  
+    "length": 1,
+    "name": "tiene_constancia"
+  },
+
+  "tiene_certificado": {
+    "field_type": "nf",
+    "default": "0",
+    "alias": "tca",
+    "entity_name": "alumno",
+    "type": "bool",  
+    "length": 1,
+    "name": "tiene_certificado"
+  },
+
+  "previas_completas": {
+    "field_type": "nf",
+    "default": "0",
+    "alias": "pc",
+    "entity_name": "alumno",
+    "type": "bool",  
+    "length": 1,
+    "name": "previas_completas"
+  },
+
+  "tiene_partida": {
+    "field_type": "nf",
+    "default": "0",
+    "alias": "tp",
+    "entity_name": "alumno",
+    "type": "bool",  
+    "length": 1,
+    "name": "tiene_partida"
+  },
+
+  "creado": {
+    "field_type": "nf",
+    "default": "current_timestamp()",
+    "alias": "cre",
+    "entity_name": "alumno",
+    "type": "datetime",  
+    "name": "creado"
+  },
+
+  "confirmado_direccion": {
+    "field_type": "nf",
+    "default": "0",
+    "alias": "cd",
+    "entity_name": "alumno",
+    "type": "bool",  
+    "length": 1,
+    "name": "confirmado_direccion"
+  }
+}

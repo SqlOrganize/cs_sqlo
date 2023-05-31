@@ -1,0 +1,10 @@
+{
+  "anio": {
+    "min_length": "2000"
+  },
+
+  "semestre": {
+    "values": ["1","2"]
+  }
+
+}

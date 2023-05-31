@@ -1,0 +1,133 @@
+{
+  "id": {
+    "field_type": "pk",
+    "default": null,
+    "alias": "id",
+    "entity_name": "calificacion",
+    "type": "str",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "nota1": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "noa",
+    "entity_name": "calificacion",
+    "type": "float",  
+    "length": 4.2,
+    "name": "nota1"
+  },
+
+  "nota2": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "nob",
+    "entity_name": "calificacion",
+    "type": "float",  
+    "length": 4.2,
+    "name": "nota2"
+  },
+
+  "nota3": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "noc",
+    "entity_name": "calificacion",
+    "type": "float",  
+    "length": 4.2,
+    "name": "nota3"
+  },
+
+  "nota_final": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "nf",
+    "entity_name": "calificacion",
+    "type": "float",  
+    "length": 4.2,
+    "name": "nota_final"
+  },
+
+  "crec": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "cre",
+    "entity_name": "calificacion",
+    "type": "float",  
+    "length": 4.2,
+    "name": "crec"
+  },
+
+  "curso": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "cur",
+    "entity_name": "calificacion",
+    "entity_ref_name": "curso",  
+    "type": "str",  
+    "length": 45,
+    "name": "curso"
+  },
+
+  "porcentaje_asistencia": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "pa",
+    "entity_name": "calificacion",
+    "type": "int",  
+    "length": 3,
+    "name": "porcentaje_asistencia"
+  },
+
+  "observaciones": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "obs",
+    "entity_name": "calificacion",
+    "type": "str",  
+    "length": 65535,
+    "name": "observaciones"
+  },
+
+  "division": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "dia",
+    "entity_name": "calificacion",
+    "type": "str",  
+    "length": 255,
+    "name": "division"
+  },
+
+  "alumno": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "alu",
+    "entity_name": "calificacion",
+    "entity_ref_name": "alumno",  
+    "type": "str",  
+    "length": 45,
+    "name": "alumno"
+  },
+
+  "disposicion": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "dis",
+    "entity_name": "calificacion",
+    "entity_ref_name": "disposicion",  
+    "type": "str",  
+    "length": 45,
+    "name": "disposicion"
+  },
+
+  "fecha": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "fec",
+    "entity_name": "calificacion",
+    "type": "date",  
+    "name": "fecha"
+  }
+}

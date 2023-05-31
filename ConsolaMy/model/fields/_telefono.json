@@ -1,0 +1,70 @@
+{
+  "id": {
+    "field_type": "pk",
+    "default": null,
+    "alias": "id",
+    "entity_name": "telefono",
+    "type": "str",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "tipo": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "tip",
+    "entity_name": "telefono",
+    "type": "str",  
+    "length": 45,
+    "name": "tipo"
+  },
+
+  "prefijo": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "pre",
+    "entity_name": "telefono",
+    "type": "str",  
+    "length": 45,
+    "name": "prefijo"
+  },
+
+  "numero": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "num",
+    "entity_name": "telefono",
+    "type": "str",  
+    "length": 255,
+    "name": "numero"
+  },
+
+  "insertado": {
+    "field_type": "nf",
+    "default": "current_timestamp()",
+    "alias": "ins",
+    "entity_name": "telefono",
+    "type": "datetime",  
+    "name": "insertado"
+  },
+
+  "eliminado": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "eli",
+    "entity_name": "telefono",
+    "type": "datetime",  
+    "name": "eliminado"
+  },
+
+  "persona": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "per",
+    "entity_name": "telefono",
+    "entity_ref_name": "persona",  
+    "type": "str",  
+    "length": 45,
+    "name": "persona"
+  }
+}

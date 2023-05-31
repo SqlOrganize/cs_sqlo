@@ -1,0 +1,33 @@
+{
+  "id": {
+    "field_type": "pk",
+    "default": null,
+    "alias": "id",
+    "entity_name": "disposicion",
+    "type": "str",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "asignatura": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "asi",
+    "entity_name": "disposicion",
+    "entity_ref_name": "asignatura",  
+    "type": "str",  
+    "length": 45,
+    "name": "asignatura"
+  },
+
+  "planificacion": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "pla",
+    "entity_name": "disposicion",
+    "entity_ref_name": "planificacion",  
+    "type": "str",  
+    "length": 45,
+    "name": "planificacion"
+  }
+}

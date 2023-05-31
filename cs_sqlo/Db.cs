@@ -1,6 +1,16 @@
 ﻿using Newtonsoft.Json;
+using System.Text.Json;
+
 using System.IO;
 using System.Text;
+
+public class EntityTree
+{
+    public string field_name { get; set; }
+    public string entity_name { get; set; }
+    public Dictionary<string, EntityTree> children { get; set; }
+}
+
 
 namespace cs_sqlo
 {
@@ -35,7 +45,7 @@ namespace cs_sqlo
         /*
         { entity_name > { field_id > { keystring > value }}}
         */
-        protected Dictionary<string, Dictionary<string, Dictionary<string, object>>> _tree = new();
+        protected Dictionary<string, Dictionary<string, EntityTree>> _tree = new();
 
         /*
         { entity_name > { field_id > { keystring > value }}}
@@ -59,7 +69,14 @@ namespace cs_sqlo
             string path = _config["path_model"] + "entity-tree.json";
             using (StreamReader r = new StreamReader(path, Encoding.UTF8))
             {
-                _tree = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Dictionary<string, object>>>>(r.ReadToEnd())!;
+                 _tree = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, EntityTree>>>(r.ReadToEnd())!;
+                foreach (var (k,v) in _tree)
+                {
+                    
+                }
+                 var tree3 = "somethin";
+
+                    
             }
 
             using (StreamReader r = new StreamReader(_config["path_model"] + "entity-relations.json"))
@@ -92,8 +109,8 @@ namespace cs_sqlo
             }
         }
 
-        public Dictionary<string, Dictionary<string, Dictionary<string, object>>> tree() => _tree;
-        public Dictionary<string, Dictionary<string, object>> tree_entity(string entity_name) => _tree[entity_name];
+        public Dictionary<string, Dictionary<string, EntityTree>> tree() => _tree;
+        public Dictionary<string, EntityTree> tree_entity(string entity_name) => _tree[entity_name];
         public Dictionary<string, Dictionary<string, Dictionary<string, object>>> relations() => _relations;
         public Dictionary<string, Dictionary<string, object>> relations_entity(string entity_name) => _relations[entity_name];
         public Dictionary<string, object> entities_entity(string entity_name) => _entities[entity_name];

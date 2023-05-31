@@ -1,0 +1,62 @@
+{
+  "id": {
+    "field_type": "pk",
+    "default": null,
+    "alias": "id",
+    "entity_name": "curso",
+    "type": "str",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "horas_catedra": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "hc",
+    "entity_name": "curso",
+    "type": "int",  
+    "length": 10,
+    "name": "horas_catedra"
+  },
+
+  "ige": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "ige",
+    "entity_name": "curso",
+    "type": "str",  
+    "length": 45,
+    "name": "ige"
+  },
+
+  "comision": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "com",
+    "entity_name": "curso",
+    "entity_ref_name": "comision",  
+    "type": "str",  
+    "length": 45,
+    "name": "comision"
+  },
+
+  "asignatura": {
+    "field_type": "mo",
+    "default": null,
+    "alias": "asi",
+    "entity_name": "curso",
+    "entity_ref_name": "asignatura",  
+    "type": "str",  
+    "length": 45,
+    "name": "asignatura"
+  },
+
+  "alta": {
+    "field_type": "nf",
+    "default": "current_timestamp()",
+    "alias": "alt",
+    "entity_name": "curso",
+    "type": "datetime",  
+    "name": "alta"
+  }
+}

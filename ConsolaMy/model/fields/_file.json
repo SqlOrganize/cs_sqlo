@@ -1,0 +1,60 @@
+{
+  "id": {
+    "field_type": "pk",
+    "default": null,
+    "alias": "id",
+    "entity_name": "file",
+    "type": "str",  
+    "length": 45,
+    "name": "id"
+  },
+
+  "name": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "nam",
+    "entity_name": "file",
+    "type": "str",  
+    "length": 255,
+    "name": "name"
+  },
+
+  "type": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "typ",
+    "entity_name": "file",
+    "type": "str",  
+    "length": 255,
+    "name": "type"
+  },
+
+  "content": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "con",
+    "entity_name": "file",
+    "type": "str",  
+    "length": 255,
+    "name": "content"
+  },
+
+  "size": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "siz",
+    "entity_name": "file",
+    "type": "int",  
+    "length": 10,
+    "name": "size"
+  },
+
+  "created": {
+    "field_type": "nf",
+    "default": "current_timestamp()",
+    "alias": "cre",
+    "entity_name": "file",
+    "type": "datetime",  
+    "name": "created"
+  }
+}

@@ -28,8 +28,7 @@ namespace cs_sqlo
         */
         public static void SetValue<T>(this T sender, string propertyName, object value)
         {
-            var propertyInfo1 = sender!.GetType();
-            var propertyInfo = propertyInfo1.GetProperty(propertyName);
+            var propertyInfo = sender!.GetType().GetProperty(propertyName);
 
             if (propertyInfo is null) return;
 
@@ -75,7 +74,7 @@ namespace cs_sqlo
                     }
                 }
 
-                sender.SetValue("_" + c.Key, config[c.Key]);
+                sender.SetValue(c.Key, c.Value);
             }
         }
     }
