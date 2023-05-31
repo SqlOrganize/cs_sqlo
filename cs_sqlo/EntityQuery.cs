@@ -171,6 +171,110 @@ namespace cs_sqlo
             _having = _having.Union(having).ToList();
             return this;
         }
+
+        /*
+        definir condicion para campos unicos 
+
+        # ejemplo param
+        {"field_name":"field_value", ...}
+        
+        # campos unicos simples
+        Se definen a traves del atributo Entity.unique
+        
+        # campos unicos multiples
+        Se definen a traves del atributo Entity.unique_multiple
+        */
+        public EntityQuery unique(Dictionary<string, string> param)
+        {
+            List<string> unique_fields = db.entity(entity_name).unique;
+            List<string> unique_fields_multiple = db.entity(entity_name).unique_multiple;
+
+            List<object> condition = new();
+
+            bool first = true;
+
+            foreach (var field_name in unique_fields)
+            {
+                foreach (var p in param)
+                {
+                    if((p.Key == field_name) && !p.Value.IsNullOrEmpty())
+                    {
+                        string con = "";
+                        if (first)
+                        {
+                            con = "AND";
+                            first = false;
+                        }
+                        else
+                        {
+                            con = "OR";
+                        }
+                        condition.Add(new List<object>() { p.Key, "EQUAL", p.Value, con });
+                    }
+                }
+
+            }
+            for k, v in params.items():
+                if k == f and v:
+                    if first:
+                        con = AND_
+                        first = False
+                    else:
+                        con = OR_
+
+                    condition.append([k, EQUAL, v, con])
+
+            return this;
+        }
+
+       
+        
+        # if "id" in params and params["id"]:
+        #     condition.append(["id", EQUAL, params["id"]])
+
+        first = True 
+        
+        for f in unique_fields:
+            for k, v in params.items():
+                if k == f and v:
+                    if first:
+                        con = AND_
+                        first = False
+                    else:
+                        con = OR_    
+
+                    condition.append([k, EQUAL, v, con])
+        
+        if unique_fields_multiple:
+            condition_multiple = []
+            first = True 
+            exists_condition_multiple = True #si algun campo de la condicion multiple no se encuentra definido, se carga en True.
+            for f in unique_fields_multiple:
+                if not exists_condition_multiple:
+                    break
+
+                exists_condition_multiple = False
+
+                for k, v in params.items():
+                    if k == f:
+                        exists_condition_multiple = True
+                        if first and condition:
+                            con = OR_
+                            first = False
+                        else:
+                            con = AND_    
+
+                        condition_multiple.append([k, EQUAL, v, con])
+
+            if exists_condition_multiple and condition_multiple:
+                condition.append(condition_multiple)
+
+        if not condition:
+            raise "Error al definir condition unica"
+
+        self.cond(condition)
+
+        return self
    
 
     }
