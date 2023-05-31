@@ -9,22 +9,21 @@ namespace cs_sqlo
 {
     public class Field
     {
-        protected Db _db;
-        protected string _name;
+        public Db db { get; set; }
+        public string name { get; set; }
 
-        /* nombre de la entidad */
-        protected string _entity_name;
+        public string? alias { get; set; }
+
+
+        /* 
+        nombre de la entidad 
+        */
+        public string entity_name { get; set; }
 
         /* 
         si es clave foranea: Nombre de la entidad referenciada por la clave foranea 
         */
-        protected string? _entity_ref_name;
-
-        /* 
-         si es clave foranea: Nombre del campo referenciado (habitualmente "id")
-         */
-        protected string? _field_ref_name;
-        protected string? _alias;
+        public string? entity_ref_name { get; set; }
 
         /* 
         tipo de datos generico 
@@ -37,8 +36,7 @@ namespace cs_sqlo
             timestamp
             date               
          */
-        protected string _type;
-
+        public string type { get; set; }
 
         /* 
         string con el tipo de field
@@ -47,10 +45,10 @@ namespace cs_sqlo
             "mo": Clave foranea muchos a uno
             "oo": Clave foranea uno a uno
         */
-        protected string _field_type;
+        public string field_type { get; set; }
 
         /* valor por defecto */
-        protected object? _default;
+        public object default_value { get; set; }
 
         /* longitud maxima permitida */
         //protected int? _length;  
@@ -64,35 +62,13 @@ namespace cs_sqlo
         /* lista de valores permitidos */
         //List<object> _values;
 
-        public Field(Db db, string entity_name, string field_name)
-        {
-            _db = db;
-            _name = field_name;
-            _entity_name = entity_name;
+        public Entity entity() => this.db.entity(entity_name);
 
-            Dictionary<string, object> config = _db.fields_field(entity_name, field_name);
-        }
-
-        public string name() => this._name;
-
-        public string? alias() => this._alias;
-
-        public Entity entity() => this._db.entity(_entity_name);
-
-        public Entity entity_ref() => this._db.entity(_entity_ref_name!);
+        public Entity entity_ref() => this.db.entity(entity_ref_name!);
 
         public bool is_main()
         {
-            return this._db.entity(_entity_name).main.Contains(name());
-        }
-        public string type()
-        {
-            return _type;
-        }
-
-        public object? default_value()
-        {
-            return _default;
+            return this.db.entity(entity_name).main.Contains(name);
         }
     }
 }

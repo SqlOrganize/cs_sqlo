@@ -27,54 +27,45 @@ namespace cs_sqlo
             {"GREATER_EQUAL",">="},
         };
     
-        protected Dictionary<string, object>? _config;
+        protected Dictionary<string, object>? config { get; }
+        
         protected Dictionary<string, object> _tools = new();
-        protected Dictionary<string, Dictionary<string, Field>> _field = new();
+        
         protected Dictionary<string, object> _mapping = new();
+        
         protected Dictionary<string, object> _condition = new();
 
-        /*
-        { entity_name > { field_id > { keystring > value }}}
-        */
-        protected Dictionary<string, Dictionary<string, EntityTree>> _tree = new();
+        protected Dictionary<string, Dictionary<string, EntityTree>> tree { get; set; }
 
-        /*
-        { entity_name > { field_id > { keystring > value }}}
-        */
-        protected Dictionary<string, Dictionary<string, EntityRel>> _relations = new();
-
-        /*
-        { entity_name > { keystring > value }}
-        */
+        protected Dictionary<string, Dictionary<string, EntityRel>> relations { get; set; }
         protected Dictionary<string, Entity> entities { get; set; }
 
-        /*
-        { entity_name > { field_name > { keystring > value }}}
-        */
-        protected Dictionary<string, Dictionary<string, Dictionary<string, object>>> _fields = new();
+        protected Dictionary<string, Dictionary<string, Field>> fields { get; set; }
 
-        public Db(Dictionary<string, object> config)
+        public Db(Dictionary<string, object> _config)
         {
-            _config = config;
-            string path = _config["path_model"] + "entity-tree.json";
+            config = _config;
+            fields = new Dictionary<string, Dictionary<string, Field>>();
+
+            string path = config["path_model"] + "entity-tree.json";
             using (StreamReader r = new StreamReader(path, Encoding.UTF8))
             {
-                 _tree = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, EntityTree>>>(r.ReadToEnd())!;
+                 tree = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, EntityTree>>>(r.ReadToEnd())!;
             }
 
-            using (StreamReader r = new StreamReader(_config["path_model"] + "entity-relations.json"))
+            using (StreamReader r = new StreamReader(config["path_model"] + "entity-relations.json"))
             {
-                _relations = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, EntityRel>>>(r.ReadToEnd())!;
+                relations = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, EntityRel>>>(r.ReadToEnd())!;
             }
 
-            using (StreamReader r = new StreamReader(_config["path_model"] + "_entities.json"))
+            using (StreamReader r = new StreamReader(config["path_model"] + "_entities.json"))
             {
                 entities = JsonConvert.DeserializeObject<Dictionary<string, Entity>>(r.ReadToEnd())!;
             }
 
             if (File.Exists(_config["path_model"] + "entities.json"))
             {
-                using (StreamReader r = new StreamReader(_config["path_model"] + "entities.json"))
+                using (StreamReader r = new StreamReader(config["path_model"] + "entities.json"))
                 {
                     Dictionary<string, Entity> ee = JsonConvert.DeserializeObject<Dictionary<string, Entity>>(r.ReadToEnd());
                     foreach (KeyValuePair<string, Entity> e in ee)
@@ -89,6 +80,7 @@ namespace cs_sqlo
 
             foreach(KeyValuePair<string, Entity> e in entities)
             {
+                e.Value.db = this;
                 if(!e.Value.nf_add.IsNullOrEmpty())
                 {
                     var nf = new List<string>(e.Value.nf.Count + e.Value.nf_add.Count);
@@ -157,31 +149,24 @@ namespace cs_sqlo
             }
         }
 
-        public Dictionary<string, Dictionary<string, EntityTree>> tree() => _tree;
-        public Dictionary<string, EntityTree> tree_entity(string entity_name) => _tree[entity_name];
-        public Dictionary<string, Dictionary<string, EntityRel>> relations() => _relations;
-        public Dictionary<string, EntityRel> relations_entity(string entity_name) => _relations[entity_name];
-        public Dictionary<string, Dictionary<string, object>> fields_entity(string entity_name)
+        public Dictionary<string, Field> fields_entity(string entity_name)
         {
-            if (!_fields.ContainsKey(entity_name))
+            if (!fields.ContainsKey(entity_name))
             {
-                using (StreamReader r = new StreamReader(_config!["path_model"] + "fields/_"+entity_name+".json"))
+                using (StreamReader r = new StreamReader(config!["path_model"] + "fields/_"+entity_name+".json"))
                 {
-                    _fields[entity_name] = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(r.ReadToEnd())!;
+                    fields[entity_name] = JsonConvert.DeserializeObject<Dictionary<string, Field>>(r.ReadToEnd())!;
 
-                    if (File.Exists(_config["path_model"] + "fields/" + entity_name + ".json"))
+                    if (File.Exists(config["path_model"] + "fields/" + entity_name + ".json"))
                     {
-                        using (StreamReader r2 = new StreamReader(_config["path_model"] + "fields/" + entity_name + ".json"))
+                        using (StreamReader r2 = new StreamReader(config["path_model"] + "fields/" + entity_name + ".json"))
                         {
-                            Dictionary<string, Dictionary<string, object>> ee = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(r2.ReadToEnd());
-                            foreach (KeyValuePair<string, Dictionary<string, object>> e in ee) 
+                            Dictionary<string, Field> ee = JsonConvert.DeserializeObject<Dictionary<string, Field>>(r2.ReadToEnd());
+                            foreach (KeyValuePair<string, Field> e in ee) 
                             {
-                                if (_fields[entity_name].ContainsKey(e.Key))
+                                if (fields[entity_name].ContainsKey(e.Key))
                                 {
-                                    List<Dictionary<string, object>> p = new();
-                                    p.Add(_fields[entity_name][e.Key]);
-                                    p.Add(ee[e.Key]);
-                                    _fields[entity_name][e.Key] = Utils.MergeDicts(p);
+                                    Utils.CopyValues(fields[entity_name][e.Key], e.Value);
                                 }
                             }
                         }
@@ -189,9 +174,14 @@ namespace cs_sqlo
                     }
 
                 }
+
+                foreach (KeyValuePair<string, Field> e in fields[entity_name])
+                {
+                    e.Value.db = this;
+                }
             }
 
-            return _fields[entity_name];
+            return fields[entity_name];
         }
 
         /* 
@@ -200,14 +190,16 @@ namespace cs_sqlo
         Si no existe el field consultado se devuelve una configuracion vacia
         No es obligatorio que exista el field en la configuracion, se cargaran los parametros por defecto.
         */
-        public Dictionary<string, object> fields_field(string entity_name, string field_name)
+        public Field field(string entity_name, string field_name)
         {
-            Dictionary<string, Dictionary<string, object>> fe = fields_entity(entity_name);
-            return (fe.ContainsKey(field_name)) ? fe[entity_name] : new Dictionary<string, object>();
+            Dictionary<string, Field> fe = fields_entity(entity_name);
+            return (fe.ContainsKey(field_name)) ? fe[entity_name] : new Field();
         }
 
-        public List<string> entity_names() => _tree.Keys.ToList();
+        public List<string> entity_names() => tree.Keys.ToList();
+        
         public List<string> field_names(string entity_name) => fields_entity(entity_name).Keys.ToList();
+        
         public Dictionary<string, string> explode_field(string entity_name, string field_name)
         {
             List<string> f = field_name.Split("-").ToList();
@@ -217,7 +209,7 @@ namespace cs_sqlo
                 return new Dictionary<string, string>
                 {
                     { "field_id", f[0] },
-                    { "entity_name", relations_entity(entity_name)[f[0]].entity_name },
+                    { "entity_name", relations[entity_name][f[0]].entity_name },
                     { "field_name", f[0] },
                 };
 
@@ -230,22 +222,12 @@ namespace cs_sqlo
                 { "field_name", field_name },
             };
         }
-
+        
         public Entity entity(string entity_name)
         {
             return entities[entity_name];
         }
 
-        public Field field(string entity_name, string field_name)
-        {
-            if (!_field.ContainsKey(entity_name))
-                _field[entity_name] = new();
-
-            if (!_field[entity_name].ContainsKey(field_name))
-                _field[entity_name][field_name] = new Field(this, entity_name, field_name);
-
-            return _field[entity_name][field_name];
-        }
 
         //field_by_id(self, entity_name:str, field_id:str) 
         //tools(self, entity_name)

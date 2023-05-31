@@ -13,8 +13,8 @@ namespace cs_sqlo
         Propiedades con sufijo "add" o "sub" existen para facilitar la configuracion
         Seran agregadas o quitadas de su atributo asociado en la inicializacion
         */
-        public Db db { get; }
-        
+        public Db db { get; set; }
+
         /*
         Es necesario que se defina como propiedad con get y set, para poder 
         invocar dinamicamente al atributo mediante this!.GetType().GetProperty(name);

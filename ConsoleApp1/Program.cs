@@ -15,6 +15,7 @@ Dictionary<string, object> config = new Dictionary<string, object>()
 
 //var db = new DbMy(config);
 DbSs db = new(config);
+var fields_alumno = db.fields_entity("alumno");
 Console.WriteLine(db.ToString());
 
 //Entity alumno = db.entity("alumno");
