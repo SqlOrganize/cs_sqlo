@@ -14,7 +14,6 @@ namespace cs_sqlo
 
         public string? alias { get; set; }
 
-
         /* 
         nombre de la entidad 
         */

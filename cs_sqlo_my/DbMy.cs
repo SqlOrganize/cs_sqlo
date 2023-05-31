@@ -14,7 +14,6 @@ namespace cs_sqlo_my
          */
         public DbMy(Dictionary<string, object> config): base(config)
         {
-            _config = config;
             _conn = new MySqlConnection();
             _conn.ConnectionString = (string)config["connection_string"];
             _conn.Open();

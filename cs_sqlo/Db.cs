@@ -38,6 +38,7 @@ namespace cs_sqlo
         protected Dictionary<string, Dictionary<string, EntityTree>> tree { get; set; }
 
         protected Dictionary<string, Dictionary<string, EntityRel>> relations { get; set; }
+
         protected Dictionary<string, Entity> entities { get; set; }
 
         protected Dictionary<string, Dictionary<string, Field>> fields { get; set; }
@@ -227,7 +228,6 @@ namespace cs_sqlo
         {
             return entities[entity_name];
         }
-
 
         //field_by_id(self, entity_name:str, field_id:str) 
         //tools(self, entity_name)

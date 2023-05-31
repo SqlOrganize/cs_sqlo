@@ -25,7 +25,7 @@ namespace cs_sqlo
             }
         }
 
-        public static Dictionary<K, V> MergeDicts<K, V>(IEnumerable<Dictionary<K, V>> dictionaries) where K : notnull
+        public static Dictionary<K, V> MergeManyDicts<K, V>(IEnumerable<Dictionary<K, V>> dictionaries) where K : notnull
         {
             Dictionary<K, V> result = new Dictionary<K, V>();
 
@@ -33,6 +33,16 @@ namespace cs_sqlo
             {
                 dict.ToList().ForEach(pair => result[pair.Key] = pair.Value);
             }
+
+            return result;
+        }
+
+        public static Dictionary<K, V> MergeDicts<K, V>(Dictionary<K, V> dictionary1, Dictionary<K, V> dictionary2) where K : notnull
+        {
+            Dictionary<K, V> result = new Dictionary<K, V>();
+
+            dictionary1.ToList().ForEach(pair => result[pair.Key] = pair.Value);
+            dictionary2.ToList().ForEach(pair => result[pair.Key] = pair.Value);
 
             return result;
         }
@@ -55,6 +65,43 @@ namespace cs_sqlo
             return o == null;
         }
 
+        public static bool IsList(this object o)
+        {
+            if (o == null) return false;
+            return o is IList &&
+                   o.GetType().IsGenericType &&
+                   o.GetType().GetGenericTypeDefinition().IsAssignableFrom(typeof(List<>));
+        }
+
+        public static bool IsDictionary(this object o)
+        {
+            if (o == null) return false;
+            return o is IDictionary &&
+                   o.GetType().IsGenericType &&
+                   o.GetType().GetGenericTypeDefinition().IsAssignableFrom(typeof(Dictionary<,>));
+        }
+
+        public static List<object> add_prefix_multi_list(List<object> list, string prefix = "")
+        {
+            List<object> clonedList = new List<object>(list);
+
+            if (!clonedList.IsNullOrEmpty())
+            {
+                if (clonedList.ElementAt(0).IsList())
+                {
+                    for (var i = 0; i < clonedList.Count; i++)
+                    {
+                        var a = add_prefix_multi_list(clonedList[i] as List<object>, prefix);
+                        clonedList[i] = a;
+                    }
+                }
+                else
+                {
+                    clonedList[0] = prefix + (clonedList[0] as string);
+                }
+            }
+
+            return clonedList;
+        }
     }
-       
 }

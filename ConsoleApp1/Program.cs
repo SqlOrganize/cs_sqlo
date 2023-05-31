@@ -16,6 +16,13 @@ Dictionary<string, object> config = new Dictionary<string, object>()
 //var db = new DbMy(config);
 DbSs db = new(config);
 var fields_alumno = db.fields_entity("alumno");
+
+List<object> a = new() { 
+    new List<object>() { "field1", "EQUAL", "something" },
+    new List<object>() { "field2", "EQUAL", "something else" }
+};
+List<object> b = Utils.add_prefix_multi_list(a, "test");
+
 Console.WriteLine(db.ToString());
 
 //Entity alumno = db.entity("alumno");
