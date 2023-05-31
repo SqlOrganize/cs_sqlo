@@ -71,7 +71,6 @@ namespace cs_sqlo
             _entity_name = entity_name;
 
             Dictionary<string, object> config = _db.fields_field(entity_name, field_name);
-            this.SetConfig(config);
         }
 
         public string name() => this._name;

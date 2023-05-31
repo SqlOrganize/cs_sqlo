@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,22 @@ namespace cs_sqlo
 {
     public static class Utils
     {
-        public static Dictionary<K, V> MergeDicts<K, V>(IEnumerable<Dictionary<K, V>> dictionaries) where K : notnull    
+
+        public static void CopyValues<T>(T target, T source)
+        {
+            Type t = typeof(T);
+
+            var properties = t.GetProperties().Where(prop => prop.CanRead && prop.CanWrite);
+
+            foreach (var prop in properties)
+            {
+                var value = prop.GetValue(source, null);
+                if (!value.IsNullOrEmpty())
+                    prop.SetValue(target, value, null);
+            }
+        }
+
+        public static Dictionary<K, V> MergeDicts<K, V>(IEnumerable<Dictionary<K, V>> dictionaries) where K : notnull
         {
             Dictionary<K, V> result = new Dictionary<K, V>();
 
@@ -21,61 +37,24 @@ namespace cs_sqlo
             return result;
         }
 
-        /*
-        Seteo dinamico
-
-        https://stackoverflow.com/questions/1825952/how-to-create-a-generic-extension-method
-        */
-        public static void SetValue<T>(this T sender, string propertyName, object value)
+        public static bool IsNullOrEmpty(this IList List)
         {
-            var propertyInfo = sender!.GetType().GetProperty(propertyName);
-
-            if (propertyInfo is null) return;
-
-            var type = Nullable.GetUnderlyingType(propertyInfo.PropertyType) ?? propertyInfo.PropertyType;
-
-            if (propertyInfo.PropertyType.IsEnum)
-            {
-                propertyInfo.SetValue(sender, Enum.Parse(propertyInfo.PropertyType, value.ToString()!));
-            }
-            else
-            {
-                var safeValue = (value == null) ? null : Convert.ChangeType(value, type);
-                propertyInfo.SetValue(sender, safeValue, null);
-            }
+            return (List == null || List.Count < 1);
         }
 
-        public static void SetConfig<T>(this T sender, Dictionary<string, object> config)
+        public static bool IsNullOrEmpty(this IDictionary Dictionary)
         {
-            foreach (KeyValuePair<string, object> c in config)
-            {
-                if (c.Key.Contains("+"))
-                {
-                    string k = c.Key.TrimEnd(new Char[] { '+' });
-                    if (!config.ContainsKey(k)) config[k] = new List<object>();
-                    List<object> conf = JsonConvert.DeserializeObject<List<object>>(config[k].ToString());
-                    foreach (object v in JsonConvert.DeserializeObject<List<object>>(c.Value.ToString()))
-                    {
-                        if (!conf.Contains(v))
-                        {
-                            conf.Add(v);
-                        }
-                    }
-                    config[k] = conf;
-                }
-                else
-                {
-                    if (c.Key.Contains("-"))
-                    {
-                        string k = c.Key.TrimEnd(new Char[] { '-' });
-                        if (!config.ContainsKey(k)) config[k] = new List<object>();
-                        List<object> conf = (List<object>)config[k];
-                        config[k] = conf.Except((List<object>)c.Value).ToList();
-                    }
-                }
-
-                sender.SetValue(c.Key, c.Value);
-            }
+            return (Dictionary == null || Dictionary.Count < 1);
         }
+
+        public static bool IsNullOrEmpty(this object? o)
+        {
+            if (o is IDictionary) return ((IDictionary)o).IsNullOrEmpty();
+            if (o is IList) return ((IList)o).IsNullOrEmpty();
+            if (o is string) return ((string)o).IsNullOrEmpty();
+            return o == null;
+        }
+
     }
+       
 }

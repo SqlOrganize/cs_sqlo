@@ -4,14 +4,6 @@ using System.Text.Json;
 using System.IO;
 using System.Text;
 
-public class EntityTree
-{
-    public string field_name { get; set; }
-    public string entity_name { get; set; }
-    public Dictionary<string, EntityTree> children { get; set; }
-}
-
-
 namespace cs_sqlo
 {
     public class Db
@@ -36,7 +28,6 @@ namespace cs_sqlo
         };
     
         protected Dictionary<string, object>? _config;
-        protected Dictionary<string, Entity> _entity = new();
         protected Dictionary<string, object> _tools = new();
         protected Dictionary<string, Dictionary<string, Field>> _field = new();
         protected Dictionary<string, object> _mapping = new();
@@ -50,18 +41,17 @@ namespace cs_sqlo
         /*
         { entity_name > { field_id > { keystring > value }}}
         */
-        protected Dictionary<string, Dictionary<string, Dictionary<string, object>>> _relations = new();
+        protected Dictionary<string, Dictionary<string, EntityRel>> _relations = new();
 
         /*
         { entity_name > { keystring > value }}
         */
-        protected Dictionary<string, Dictionary<string, object>> _entities = new();
-        
+        protected Dictionary<string, Entity> entities { get; set; }
+
         /*
         { entity_name > { field_name > { keystring > value }}}
         */
         protected Dictionary<string, Dictionary<string, Dictionary<string, object>>> _fields = new();
-
 
         public Db(Dictionary<string, object> config)
         {
@@ -70,50 +60,107 @@ namespace cs_sqlo
             using (StreamReader r = new StreamReader(path, Encoding.UTF8))
             {
                  _tree = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, EntityTree>>>(r.ReadToEnd())!;
-                foreach (var (k,v) in _tree)
-                {
-                    
-                }
-                 var tree3 = "somethin";
-
-                    
             }
 
             using (StreamReader r = new StreamReader(_config["path_model"] + "entity-relations.json"))
             {
-                _relations = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Dictionary<string, object>>>>(r.ReadToEnd())!;
+                _relations = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, EntityRel>>>(r.ReadToEnd())!;
             }
 
             using (StreamReader r = new StreamReader(_config["path_model"] + "_entities.json"))
             {
-                _entities = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(r.ReadToEnd())!;
+                entities = JsonConvert.DeserializeObject<Dictionary<string, Entity>>(r.ReadToEnd())!;
             }
 
             if (File.Exists(_config["path_model"] + "entities.json"))
             {
                 using (StreamReader r = new StreamReader(_config["path_model"] + "entities.json"))
                 {
-                    Dictionary<string, Dictionary<string, object>> ee = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(r.ReadToEnd());
-                    foreach (KeyValuePair<string, Dictionary<string, object>> e in ee)
+                    Dictionary<string, Entity> ee = JsonConvert.DeserializeObject<Dictionary<string, Entity>>(r.ReadToEnd());
+                    foreach (KeyValuePair<string, Entity> e in ee)
                     {
-                        if (_entities.ContainsKey(e.Key))
+                        if (entities.ContainsKey(e.Key))
                         {
-                            List<Dictionary<string, object>> p = new();
-                            p.Add(_entities[e.Key]);
-                            p.Add(ee[e.Key]);
-                            _entities[e.Key] = Utils.MergeDicts(p);
+                            Utils.CopyValues(entities[e.Key], e.Value);                            
                         }
                     }
                 }
+            }
 
+            foreach(KeyValuePair<string, Entity> e in entities)
+            {
+                if(!e.Value.nf_add.IsNullOrEmpty())
+                {
+                    var nf = new List<string>(e.Value.nf.Count + e.Value.nf_add.Count);
+                    nf.AddRange(e.Value.nf);
+                    nf.AddRange(e.Value.nf_add);
+                    e.Value.nf = nf;
+                    e.Value.nf_add.Clear();
+                }
+                if (!e.Value.mo_add.IsNullOrEmpty())
+                {
+                    var mo = new List<string>(e.Value.mo.Count + e.Value.mo_add.Count);
+                    mo.AddRange(e.Value.mo);
+                    mo.AddRange(e.Value.mo_add);
+                    e.Value.mo = mo;
+                    e.Value.mo_add.Clear();
+                }
+                if (!e.Value.oo_add.IsNullOrEmpty())
+                {
+                    var oo = new List<string>(e.Value.oo.Count + e.Value.oo_add.Count);
+                    oo.AddRange(e.Value.oo);
+                    oo.AddRange(e.Value.oo_add);
+                    e.Value.oo = oo;
+                    e.Value.oo_add.Clear();
+                }
+                if (!e.Value.unique_add.IsNullOrEmpty())
+                {
+                    var unique = new List<string>(e.Value.unique.Count + e.Value.unique_add.Count);
+                    unique.AddRange(e.Value.unique);
+                    unique.AddRange(e.Value.unique_add);
+                    e.Value.unique = unique;
+                    e.Value.unique_add.Clear();
+                }
+                if (!e.Value.not_null_add.IsNullOrEmpty())
+                {
+                    var not_null = new List<string>(e.Value.not_null.Count + e.Value.not_null_add.Count);
+                    not_null.AddRange(e.Value.not_null);
+                    not_null.AddRange(e.Value.not_null_add);
+                    e.Value.not_null = not_null;
+                    e.Value.not_null_add.Clear();
+                }
+                if (!e.Value.nf_sub.IsNullOrEmpty())
+                {
+                    e.Value.nf = e.Value.nf.Except(e.Value.nf_sub).ToList();
+                    e.Value.nf_sub.Clear();
+                }
+                if (!e.Value.mo_sub.IsNullOrEmpty())
+                {
+                    e.Value.mo = e.Value.mo.Except(e.Value.mo_sub).ToList();
+                    e.Value.mo_sub.Clear();
+                }
+                if (!e.Value.oo_sub.IsNullOrEmpty())
+                {
+                    e.Value.oo = e.Value.oo.Except(e.Value.oo_sub).ToList();
+                    e.Value.oo_sub.Clear();
+                }
+                if (!e.Value.unique_sub.IsNullOrEmpty())
+                {
+                    e.Value.unique = e.Value.unique.Except(e.Value.unique_sub).ToList();
+                    e.Value.unique_sub.Clear();
+                }
+                if (!e.Value.not_null_sub.IsNullOrEmpty())
+                {
+                    e.Value.not_null = e.Value.not_null.Except(e.Value.not_null_sub).ToList();
+                    e.Value.not_null_sub.Clear();
+                }
             }
         }
 
         public Dictionary<string, Dictionary<string, EntityTree>> tree() => _tree;
         public Dictionary<string, EntityTree> tree_entity(string entity_name) => _tree[entity_name];
-        public Dictionary<string, Dictionary<string, Dictionary<string, object>>> relations() => _relations;
-        public Dictionary<string, Dictionary<string, object>> relations_entity(string entity_name) => _relations[entity_name];
-        public Dictionary<string, object> entities_entity(string entity_name) => _entities[entity_name];
+        public Dictionary<string, Dictionary<string, EntityRel>> relations() => _relations;
+        public Dictionary<string, EntityRel> relations_entity(string entity_name) => _relations[entity_name];
         public Dictionary<string, Dictionary<string, object>> fields_entity(string entity_name)
         {
             if (!_fields.ContainsKey(entity_name))
@@ -170,7 +217,7 @@ namespace cs_sqlo
                 return new Dictionary<string, string>
                 {
                     { "field_id", f[0] },
-                    { "entity_name", (string)relations_entity(entity_name)[f[0]]["entity_name"] },
+                    { "entity_name", relations_entity(entity_name)[f[0]].entity_name },
                     { "field_name", f[0] },
                 };
 
@@ -186,10 +233,7 @@ namespace cs_sqlo
 
         public Entity entity(string entity_name)
         {
-            if (!_entity.ContainsKey(entity_name))
-                _entity[entity_name] = new Entity(this, entity_name);
-
-            return _entity[entity_name];
+            return entities[entity_name];
         }
 
         public Field field(string entity_name, string field_name)

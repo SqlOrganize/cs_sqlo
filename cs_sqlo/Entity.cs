@@ -9,6 +9,10 @@ namespace cs_sqlo
 {
     public class Entity
     {
+        /**
+        Propiedades con sufijo "add" o "sub" existen para facilitar la configuracion
+        Seran agregadas o quitadas de su atributo asociado en la inicializacion
+        */
         public Db db { get; }
         
         /*
@@ -21,10 +25,18 @@ namespace cs_sqlo
 
         public string? schema { get; set;  }
 
-        public List<string> pk { get; set; }
+        public string pk { get; set; }
         public List<string> nf { get; set; }
+        public List<string> nf_add { get; set; } 
+        public List<string> nf_sub { get; set; }
         public List<string> mo { get; set; }
+        public List<string> mo_add { get; set; }
+        public List<string> mo_sub { get; set; }
         public List<string> oo { get; set; }
+        public List<string> oo_add { get; set; }
+        public List<string> oo_sub { get; set; }
+
+
 
         /* 
         array dinamico para identificar univocamente a una entidad en un momento determinado
@@ -57,6 +69,15 @@ namespace cs_sqlo
         @example ["field1","field2",...]
         */
         public List<string> unique { get; set; }
+        public List<string> unique_add { get; set; }
+        public List<string> unique_sub { get; set; }
+
+        /*
+        Valores no nulos        
+        */
+        public List<string> not_null { get; set; }
+        public List<string> not_null_add { get; set; }
+        public List<string> not_null_sub { get; set; }
 
         /*
         Valores unicos multiples
@@ -64,28 +85,11 @@ namespace cs_sqlo
         */
         public List<string> unique_multiple { get; set; }
 
-        public Entity(Db _db, string entity_name)
-        {
-            db = _db;
-            name = entity_name;
-            pk = new();
-            nf = new();
-            mo = new();
-            oo = new();
-            identifier = new();
-            order_default = new();
-            no_admin = new();
-            main = new() { "id" };
-            unique = new() { "id" };
-            unique_multiple = new();
-            Dictionary<string, object> config = db.entities_entity(entity_name);
-            this.SetConfig(config);
-        }
-
         public string schema_ => String.IsNullOrEmpty(schema) ? schema : "";
         public string schema_name => schema + name;
         public string schema_name_alias => schema + name + " AS " + alias;
-        
+
+       
         protected List<Field> _fields(List<string> field_names)
         {
             List<Field> fields = new();

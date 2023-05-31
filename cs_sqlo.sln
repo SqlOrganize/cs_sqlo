@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cs_sqlo_my", "cs_sqlo_my\cs
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cs_sqlo_ss", "cs_sqlo_ss\cs_sqlo_ss.csproj", "{15DE482F-5207-495F-8353-4C908D9671F7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{30994DE1-2DE5-43EE-9369-BA8045B9C118}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleSs", "ConsoleApp1\ConsoleSs.csproj", "{30994DE1-2DE5-43EE-9369-BA8045B9C118}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsolaMy", "ConsolaMy\ConsolaMy.csproj", "{A45883BF-C034-45E7-B5BA-DA0A179F8D92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsolaMy", "ConsolaMy\ConsolaMy.csproj", "{A45883BF-C034-45E7-B5BA-DA0A179F8D92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

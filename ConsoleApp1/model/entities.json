@@ -1,7 +1,7 @@
 {
   "alumno": {
     "main": ["persona"],
-    "nf+":["tramo_ingreso"],
+    "nf_add":["tramo_ingreso"],
     "no_admin":["tramo_ingreso"]
   },
 
@@ -13,7 +13,9 @@
   "calendario": {
     "order_default": {"anio":"DESC", "semestre":"DESC"},
     "main": ["descripcion","anio", "semestre"],
-    "unique": ["id", "descripcion"]
+    "unique": [ "id", "descripcion" ],
+    "nf_sub":["descripcion"],
+
   },
 
   "cargo": {
@@ -65,7 +67,7 @@
   "planificacion": {
     "main":["anio","semestre","plan"],
     "unique_multiple": ["plan", "anio", "semestre"],
-    "nf+":["tramo"]
+    "nf_add":["tramo"]
   },
 
   "planilla_docente": {
