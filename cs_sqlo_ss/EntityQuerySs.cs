@@ -31,7 +31,18 @@ namespace cs_sqlo_ss
 
         }
 
-    
+
+        protected (string sql, List<object>? param, string con) _sql_cond_recursive(List<object> condition)
+        {
+            
+            if (condition[0].IsList()) //si el primer valor es una lista, corresponde a un arbol de condiciones
+                return _sql_cond_iterable(condition);
+
+            var field = condition[0];
+            var option = condition[1];
+            var value = condition[2];
+            var con = (condition.Count == 4) ? condition[3] : "AND";
+        }
         /*
         Metodo recursivo para definir condicion
 
@@ -50,7 +61,7 @@ namespace cs_sqlo_ss
             if (condition.IsNullOrEmpty())
                 throw new Exception("Condicion vacia");
 
-            if (condition.IsTree()) //si el primer valor es una lista, corresponde a un arbol de condiciones
+            if (condition.HasTree()) //si el primer valor es una lista, corresponde a un arbol de condiciones
                 return _sql_cond_iterable(condition);
 
 
@@ -69,7 +80,7 @@ namespace cs_sqlo_ss
             "con": "AND"
         }
         */
-        protected (string sql, List<object>? param, string con) _sql_cond_iterable(Cond condition_iterable)
+        protected (string sql, List<object>? param, string con) _sql_cond_iterable(List<object> condition_iterable)
         {
             /*
             Lista de tuplas
@@ -77,9 +88,9 @@ namespace cs_sqlo_ss
             */
             List<(string sql, List<object>? param, string con)> conditions_conc = new();
         
-            foreach (var ci in condition_iterable.tree)
+            foreach (var ci in condition_iterable)
             {
-                var cc = _sql_cond_recursive(ci);
+                var cc = _sql_cond_recursive((List<object>)ci);
 
 
             }
