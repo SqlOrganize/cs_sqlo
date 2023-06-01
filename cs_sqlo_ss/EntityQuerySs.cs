@@ -10,6 +10,9 @@ namespace cs_sqlo_ss
         {
         }
 
-
+        public override (string sql, List<object> param, string con) build()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

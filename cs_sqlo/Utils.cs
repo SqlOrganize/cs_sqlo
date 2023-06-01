@@ -59,10 +59,21 @@ namespace cs_sqlo
 
         public static bool IsNullOrEmpty(this object? o)
         {
-            if (o is IDictionary) return ((IDictionary)o).IsNullOrEmpty();
+            if (o is null)
+            {
+                return true;
+            }
+
+            if (o is IDictionary)
+            {
+                return ((IDictionary)o).IsNullOrEmpty();
+            }
             if (o is IList) return ((IList)o).IsNullOrEmpty();
-            if (o is string) return ((string)o).IsNullOrEmpty();
-            return o == null;
+            if (o is string)
+            {
+                return String.IsNullOrEmpty((string)o);
+            }
+            return false;
         }
 
         public static bool IsList(this object o)

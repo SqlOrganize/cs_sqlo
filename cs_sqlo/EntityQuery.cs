@@ -1,17 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace cs_sqlo
+﻿namespace cs_sqlo
 {
-    public class EntityQuery
+    public abstract class EntityQuery
     {
         public Db db { get; }
         public string entity_name { get; }
@@ -39,7 +28,7 @@ namespace cs_sqlo
         Similar a _fields pero se define un alias para concatenar un conjunto de fields
         Ej ["nombre" => ["nombres", "apellidos"], "max" => ["horas_catedra.max", "edad.max"]]
         */
-        protected Dictionary<string, List<string>> _fields_concat = new();
+        protected Dictionary<string, string[]> _fields_concat = new();
 
         /*
         Similar a fields pero campo de agrupamiento
@@ -49,7 +38,7 @@ namespace cs_sqlo
         /*
         Similar a _fields_concat pero campo de agrupamiento
         */
-        protected Dictionary<string, List<string>> _group_concat = new();
+        protected Dictionary<string, string[]> _group_concat = new();
 
         /*
         condicion de agrupamiento
@@ -79,7 +68,7 @@ namespace cs_sqlo
         -GROUP_CONCAT(DISTINCT persona)
         */
 
-        protected Dictionary<string, List<string>> _str_agg = new();
+        protected Dictionary<string, string[]> _str_agg = new();
 
 
         public EntityQuery(Db _db, string _entity_name)
@@ -101,18 +90,21 @@ namespace cs_sqlo
             return this;
         }
 
-
-
         public EntityQuery param(string key, object value)
         {
             cond(new List<object>() { key, "EQUAL", value });
             return this;
         }
-        public EntityQuery order(Dictionary<string, string> order)
+
+        public EntityQuery order(params (string field_name, string sort)[] order)
         {
-            _order = order;
+            foreach (var o in order)
+            {
+                _order.Add(o.field_name, o.sort);
+            }
             return this;
         }
+
         public EntityQuery order(string field_name, string asc_desc = "ASC")
         {
             _order.Add(field_name, asc_desc);
@@ -130,40 +122,28 @@ namespace cs_sqlo
             return this;
         }
 
-        public EntityQuery field(string field)
+        public EntityQuery fields(params string[] fields)
         {
-            _fields.Add(field);
-            return this;
-        }
-        public EntityQuery fields(List<string>? fields)
-        {
-            if (fields.IsNullOrEmpty())
-            {
-                return fields_tree();
-            }
             _fields = _fields.Union(fields).ToList();
             return this;
         }
 
-        public EntityQuery fields_tree()
+        public EntityQuery fields()
         {
-            //_fields = db.tools(entity_name).field_names();
+            var fields = db.tools(entity_name).field_names();
+            _fields = _fields.Union(fields).ToList();
             return this;
         }
-        public EntityQuery fields_concat(Dictionary<string, List<string>> fields)
+
+        public EntityQuery fields_concat(Dictionary<string, string[]> fields)
         {
             _fields_concat = Utils.MergeDicts(_fields_concat, fields);
             return this;
         }
 
-        public EntityQuery fields_concat(string alias, List<string> fields)
+        public EntityQuery fields_concat(string alias, params string[] fields)
         {
-            Dictionary<string, List<string>> f = new()
-            {
-                { alias , fields },
-            };
-
-            _fields_concat = Utils.MergeDicts(_fields_concat, f);
+            _fields_concat[alias] = fields;
             return this;
         }
 
@@ -174,21 +154,37 @@ namespace cs_sqlo
             return this;
         }
 
-        public EntityQuery group_concat(Dictionary<string, List<string>> group)
+        public EntityQuery group_concat(Dictionary<string, string[]> group)
         {
             _group_concat = Utils.MergeDicts(_group_concat, group);
             return this;
         }
-        public EntityQuery str_agg(Dictionary<string, List<string>> fields)
+
+        public EntityQuery group_concat(string alias, params string[] fields)
+        {
+            _group_concat[alias] = fields;
+            return this;
+        }
+
+        public EntityQuery str_agg(Dictionary<string, string[]> fields)
         {
             _str_agg = Utils.MergeDicts(_str_agg, fields);
             return this;
         }
-        public EntityQuery hav(List<string> having)
+
+        public EntityQuery str_agg(string alias, params string[] fields)
         {
-            _having = _having.Union(having).ToList();
+            _str_agg[alias] = fields;
             return this;
         }
+
+
+        public EntityQuery hav(List<object> c)
+        {
+            _having.Add(c);
+            return this;
+        }
+
 
         /*
         definir condicion para campos unicos 
@@ -202,7 +198,7 @@ namespace cs_sqlo
         # campos unicos multiples
         Se definen a traves del atributo Entity.unique_multiple
         */
-        public EntityQuery unique(Dictionary<string, string> param)
+        public EntityQuery unique(params (string field_name, object value)[] param)
         {
             List<string> unique_fields = db.entity(entity_name).unique;
             List<string> unique_fields_multiple = db.entity(entity_name).unique_multiple;
@@ -210,12 +206,13 @@ namespace cs_sqlo
             List<object> condition = new();
 
             bool first = true;
-
             foreach (var field_name in unique_fields)
             {
                 foreach (var p in param)
                 {
-                    if ((p.Key == field_name) && !p.Value.IsNullOrEmpty())
+                    var v = p.value;
+
+                    if ((p.field_name == field_name) && !v.IsNullOrEmpty())
                     {
                         string con = "";
                         if (first)
@@ -227,12 +224,11 @@ namespace cs_sqlo
                         {
                             con = "OR";
                         }
-                        condition.Add(new List<object>() { p.Key, "EQUAL", p.Value, con });
+                        condition.Add(new List<object>() { p.field_name, "EQUAL", p.value, con });
                     }
                 }
 
             }
-
             if (!unique_fields_multiple.IsNullOrEmpty())
             {
                 List<object> condition_multiple = new();
@@ -246,7 +242,7 @@ namespace cs_sqlo
 
                     foreach (var p in param)
                     {
-                        if (p.Key == f)
+                        if (p.field_name == f)
                         {
                             string con = "";
                             exists_condition_multiple = true;
@@ -259,7 +255,7 @@ namespace cs_sqlo
                             {
                                 con = "AND";
                             }
-                            condition_multiple.Add(new List<object>() { p.Key, "EQUAL", p.Value, con });
+                            condition_multiple.Add(new List<object>() { p.field_name, "EQUAL", p.value, con });
                         }
                     }
                 }
@@ -270,8 +266,16 @@ namespace cs_sqlo
 
             }
 
+            if (!condition.IsNullOrEmpty())
+            {
+                cond(condition);
+            }
+
             return this;
         }
 
-    } 
+        abstract public (string sql, List<object> param, string con) build();
+
+    }
+
 }
