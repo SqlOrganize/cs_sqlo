@@ -20,11 +20,11 @@ namespace cs_sqlo
         condicion
         array multiple cuya raiz es [field,option,value], ejemplo: [["nombre","=","unNombre"],[["apellido","=","unApellido"],["apellido","=","otroApellido","OR"]]]
         */
-        public List<object> _condition = new();
+        protected List<object> _condition = new();
 
-        public Dictionary<string, string> _order = new();
-        public int _size = 100;
-        public int _page = 1;
+        protected Dictionary<string, string> _order = new();
+        protected int _size = 100;
+        protected int _page = 1;
 
         /*
         Los fields deben estar definidos en el mapping field, se realizará la 
@@ -33,29 +33,29 @@ namespace cs_sqlo
         - indica que pertenece a una relacion
         Ej ["nombres", "horas_catedra.sum", "edad.avg", "com_cur-horas_catedra]
         */
-        public List<string> _fields = new();
+        protected List<string> _fields = new();
 
         /*
         Similar a _fields pero se define un alias para concatenar un conjunto de fields
         Ej ["nombre" => ["nombres", "apellidos"], "max" => ["horas_catedra.max", "edad.max"]]
         */
-        public Dictionary<string, List<string>> _fields_concat = new();
+        protected Dictionary<string, List<string>> _fields_concat = new();
 
         /*
         Similar a fields pero campo de agrupamiento
         */
-        public List<string> _group = new();
+        protected List<string> _group = new();
 
         /*
         Similar a _fields_concat pero campo de agrupamiento
         */
-        public Dictionary<string, List<string>> _group_concat = new();
+        protected Dictionary<string, List<string>> _group_concat = new();
 
         /*
         condicion de agrupamiento
         array multiple cuya raiz es [field,option,value], ejemplo: [["nombre","=","unNombre"],[["apellido","=","unApellido"],["apellido","=","otroApellido","OR"]]]
         */
-        public List<object> _having = new();
+        protected List<object> _having = new();
 
         /*
         Campos a los cuales se aplica str_agg
@@ -79,7 +79,7 @@ namespace cs_sqlo
         -GROUP_CONCAT(DISTINCT persona)
         */
 
-        public Dictionary<string, List<string>> _str_agg = new();
+        protected Dictionary<string, List<string>> _str_agg = new();
 
 
         public EntityQuery(Db _db, string _entity_name)
@@ -94,24 +94,31 @@ namespace cs_sqlo
             return this;
         }
 
+        public EntityQuery cond(string field, string option, object value, string con = "AND")
+        {
+            List<object> c = new() { field, option, value, con }; 
+            _condition.Add(c);
+            return this;
+        }
+
+
+
         public EntityQuery param(string key, object value)
         {
             cond(new List<object>() { key, "EQUAL", value });
             return this;
         }
-
-        public EntityQuery param_(Dictionary<string, object> param_)
-        {
-            foreach (var p in param_)
-                cond(new List<object>() { p.Key, "EQUAL", p.Value });
-            return this;
-        }
-
         public EntityQuery order(Dictionary<string, string> order)
         {
             _order = order;
             return this;
         }
+        public EntityQuery order(string field_name, string asc_desc = "ASC")
+        {
+            _order.Add(field_name, asc_desc);
+            return this;
+        }
+
         public EntityQuery size(int size)
         {
             _size = size;
@@ -119,7 +126,7 @@ namespace cs_sqlo
         }
         public EntityQuery page(int page)
         {
-            _size = page;
+            _page = page;
             return this;
         }
 
@@ -146,6 +153,17 @@ namespace cs_sqlo
         public EntityQuery fields_concat(Dictionary<string, List<string>> fields)
         {
             _fields_concat = Utils.MergeDicts(_fields_concat, fields);
+            return this;
+        }
+
+        public EntityQuery fields_concat(string alias, List<string> fields)
+        {
+            Dictionary<string, List<string>> f = new()
+            {
+                { alias , fields },
+            };
+
+            _fields_concat = Utils.MergeDicts(_fields_concat, f);
             return this;
         }
 
@@ -254,5 +272,6 @@ namespace cs_sqlo
 
             return this;
         }
+
     } 
 }

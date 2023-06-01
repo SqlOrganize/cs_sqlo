@@ -29,19 +29,18 @@ namespace cs_sqlo
     
         protected Dictionary<string, object>? config { get; }
         
-        protected Dictionary<string, object> _tools = new();
         
         protected Dictionary<string, object> _mapping = new();
         
         protected Dictionary<string, object> _condition = new();
 
-        protected Dictionary<string, Dictionary<string, EntityTree>> tree { get; set; }
+        public Dictionary<string, Dictionary<string, EntityTree>> tree { get; set; }
 
-        protected Dictionary<string, Dictionary<string, EntityRel>> relations { get; set; }
+        public Dictionary<string, Dictionary<string, EntityRel>> relations { get; set; }
 
-        protected Dictionary<string, Entity> entities { get; set; }
+        public Dictionary<string, Entity> entities { get; set; }
 
-        protected Dictionary<string, Dictionary<string, Field>> fields { get; set; }
+        public Dictionary<string, Dictionary<string, Field>> fields { get; set; }
 
         public Db(Dictionary<string, object> _config)
         {
@@ -229,8 +228,12 @@ namespace cs_sqlo
             return entities[entity_name];
         }
 
+        public EntityTools tools(string entity_name)
+        {
+            return new EntityTools(this, entity_name);
+        }
+
         //field_by_id(self, entity_name:str, field_id:str) 
-        //tools(self, entity_name)
         //mapping(self, entity_name: str, field_id:str = "")
         //condition(self, entity_name: str, field_id:str = "")
         //query(self, entity_name)

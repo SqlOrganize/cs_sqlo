@@ -17,5 +17,10 @@ namespace cs_sqlo_ss
         }
 
         public SqlConnection conn() => _conn;
+
+        public EntityQuery query(string entity_name)
+        {
+            return new EntityQuerySs(this, entity_name);
+        }
     }
 }
