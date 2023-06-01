@@ -46,7 +46,7 @@ namespace cs_sqlo
 
             return result;
         }
-
+        
         public static bool IsNullOrEmpty(this IList List)
         {
             return (List == null || List.Count < 1);
@@ -90,6 +90,11 @@ namespace cs_sqlo
             return o is IDictionary &&
                    o.GetType().IsGenericType &&
                    o.GetType().GetGenericTypeDefinition().IsAssignableFrom(typeof(Dictionary<,>));
+        }
+
+        public static bool IsArray(this object o)
+        {
+            return o.GetType().IsArray;
         }
 
         public static List<object> add_prefix_multi_list(List<object> list, string prefix = "")
