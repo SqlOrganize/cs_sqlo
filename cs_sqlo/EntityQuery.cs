@@ -197,7 +197,7 @@ namespace cs_sqlo
             {
                 foreach (var p in param)
                 {
-                    if((p.Key == field_name) && !p.Value.IsNullOrEmpty())
+                    if ((p.Key == field_name) && !p.Value.IsNullOrEmpty())
                     {
                         string con = "";
                         if (first)
@@ -214,68 +214,45 @@ namespace cs_sqlo
                 }
 
             }
-            for k, v in params.items():
-                if k == f and v:
-                    if first:
-                        con = AND_
-                        first = False
-                    else:
-                        con = OR_
 
-                    condition.append([k, EQUAL, v, con])
+            if (!unique_fields_multiple.IsNullOrEmpty())
+            {
+                List<object> condition_multiple = new();
+                first = true;
+                bool exists_condition_multiple = true; //si algun campo de la condicion multiple no se encuentra definido, se carga en true.
+                foreach (var f in unique_fields_multiple)
+                {
+                    if (!exists_condition_multiple) break;
+
+                    exists_condition_multiple = false;
+
+                    foreach (var p in param)
+                    {
+                        if (p.Key == f)
+                        {
+                            string con = "";
+                            exists_condition_multiple = true;
+                            if (first && !condition.IsNullOrEmpty())
+                            {
+                                con = "OR";
+                                first = false;
+                            }
+                            else
+                            {
+                                con = "AND";
+                            }
+                            condition_multiple.Add(new List<object>() { p.Key, "EQUAL", p.Value, con });
+                        }
+                    }
+                }
+                if (exists_condition_multiple && !condition_multiple.IsNullOrEmpty())
+                {
+                    condition.Add(condition_multiple);
+                }
+
+            }
 
             return this;
         }
-
-       
-        
-        # if "id" in params and params["id"]:
-        #     condition.append(["id", EQUAL, params["id"]])
-
-        first = True 
-        
-        for f in unique_fields:
-            for k, v in params.items():
-                if k == f and v:
-                    if first:
-                        con = AND_
-                        first = False
-                    else:
-                        con = OR_    
-
-                    condition.append([k, EQUAL, v, con])
-        
-        if unique_fields_multiple:
-            condition_multiple = []
-            first = True 
-            exists_condition_multiple = True #si algun campo de la condicion multiple no se encuentra definido, se carga en True.
-            for f in unique_fields_multiple:
-                if not exists_condition_multiple:
-                    break
-
-                exists_condition_multiple = False
-
-                for k, v in params.items():
-                    if k == f:
-                        exists_condition_multiple = True
-                        if first and condition:
-                            con = OR_
-                            first = False
-                        else:
-                            con = AND_    
-
-                        condition_multiple.append([k, EQUAL, v, con])
-
-            if exists_condition_multiple and condition_multiple:
-                condition.append(condition_multiple)
-
-        if not condition:
-            raise "Error al definir condition unica"
-
-        self.cond(condition)
-
-        return self
-   
-
-    }
+    } 
 }
