@@ -30,7 +30,7 @@ namespace cs_sqlo
             if (value is bool)
                 return _exists(field, option, value);
 
-            if ((option == "approx") or (option == "nonapprox"))
+            if ((option == "approx") || (option == "nonapprox"))
                 return _approx_cast(field, option, value);
 
             return (
@@ -41,26 +41,32 @@ namespace cs_sqlo
         }
 
         public (string sql, List<object> param) _exists(string field_name, string option, object value) {
-            if option != "EQUAL" and option != "NONEQUAL":
-                raise "La combinacion field-option-value no está permitida para definir existencia: " + field_name + " " + option + " " + value
+            if (option != "equal" && option != "nonequal") {
+                throw new Exception("La combinacion field-option-value no está permitida para definir existencia: " + field_name + " " + option + " " + value);
+            }
 
-            return {
-                "sql":"(" + field_name + " IS NOT NULL) ",
-                "params":()
-            } if (value and option == "EQUAL") or (not value and option == "NONEQUAL") else {
-                "sql":"(" + field_name + " IS NULL) ",
-                "params":()
+            if (((bool)value && option != "equal") || (!(bool)value && option != "nonequal"))
+            {
+                return (
+                    "(" + field_name + " IS NOT NULL) ",
+                    new List<object>()
+                );
+            } else {
+                return (
+                    "(" + field_name + " IS NULL) ",
+                    new List<object>()
+                );
             }
         }
 
-        public (string sql, List<object> param) _approx_cast(self, field_name, option, value) {
-            if option == "APPROX": 
+        public (string sql, List<object> param) _approx_cast(string field_name, string option, object value) {
+            if option == "approx": 
                 return {
                 "sql":"(LOWER(CAST(" + field_name + " AS CHAR)) LIKE LOWER(%s)) ",
                     "params":("%" + value + "%", )
                 }
 
-            if option == "NONAPPROX":
+            if option == "nonapprox":
                 return {
                 "sql":"(LOWER(CAST(" + field_name + " AS CHAR)) NOT LIKE LOWER(%s)) ",
                     "params":("%" + value + "%", )
