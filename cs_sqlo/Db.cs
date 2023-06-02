@@ -8,9 +8,9 @@ namespace cs_sqlo
 {
     public class Db
     {
-        public Dictionary<string, string> options = new()
-        {
-            {"EQUAL","="},
+        public List<string> options = new()
+        {"equal","nonequal", "undefined", "default", ""
+            {"equal","="},
             {"NONEQUAL","!="},
             {"UNDEFINED","~"},
             {"DEFAULT","DEFAULT"},
