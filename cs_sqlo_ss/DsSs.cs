@@ -18,9 +18,21 @@ namespace cs_sqlo_ss
 
         public SqlConnection conn() => _conn;
 
-        public EntityQuery query(string entity_name)
+
+        public override EntityQuery query(string entity_name)
         {
             return new EntityQuerySs(this, entity_name);
+        }
+
+
+        public override Mapping mapping(string entity_name, string field_id)
+        {
+            return new MappingSs(this, entity_name, field_id);
+        }
+
+        public override Condition condition(string entity_name, string field_id)
+        {
+            return new ConditionSs(this, entity_name, field_id);
         }
     }
 }

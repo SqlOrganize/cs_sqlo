@@ -1,8 +1,4 @@
 ﻿using cs_sqlo;
-    using Microsoft.Data.SqlClient;
-using Microsoft.VisualBasic.FileIO;
-using Newtonsoft.Json.Linq;
-using System;
 
 namespace cs_sqlo_ss
 {
@@ -36,38 +32,26 @@ namespace cs_sqlo_ss
 
         Si en la posicion 0 es un string significa que es un campo a buscar, 
         caso contrario es una nueva tupla
-
-        Return tuple, example:
-        {
-            "sql": "nombres LIKE %s"
-            "param": ("valores de variables",)
-            "con": "AND"
-        }
         */
-        protected (string sql, List<object>? param, string con) _sql_cond_recursive(List<object> condition)
+        protected (string sql, List<object> param, string con) _sql_cond_recursive(List<object> condition)
         {
             
             if (condition[0].IsList()) //si el primer valor es una lista, corresponde a un arbol de condiciones
                 return _sql_cond_iterable(condition);
 
-            var field = condition[0];
-            var option = condition[1];
+            var field = (string)condition[0];
+            var option = (string)condition[1];
             var value = condition[2];
-            var con = (condition.Count == 4) ? condition[3] : "AND";
+            var con = (condition.Count == 4) ? (string)condition[3] : "AND";
 
             var condition_ = _sql_cond_field_check_value(field, option, value);
-            return (condition_.field, condition_.param, con);
+            return (condition_.sql, condition_.param, con);
         }
 
         /*
-        Si  la posicion 0 de condition_iterable es un string significa que es un campo a buscar
+        Metodo iterable para definir condicion
 
-        Return tuple, example:
-        {
-            "sql": "nombres LIKE %s"
-            "param": ("valores de variables",)
-            "con": "AND"
-        }
+        Se utiliza cuando la condicion esta formada por condiciones, hay que iterar sobre ellas
         */
         protected (string sql, List<object>? param, string con) _sql_cond_iterable(List<object> condition_iterable)
         {
@@ -111,60 +95,78 @@ namespace cs_sqlo_ss
         /*
         Combinar parametros y definir SQL
         */
-        protected (string sql, List<object>? param) _sql_cond_field_check_value(string field, string option, object value)
+        protected (string sql, List<object> param) _sql_cond_field_check_value(string field, string option, object value)
         {
             if (!value.IsList())
-            {
                 return _sql_cond_field(field, option, value);
-            }
 
             string sql = "";
             List<object> param = new();
-            bool include_cond = false; //flag para indicar que debe incluirse la condicion
+            bool include_con = false; //flag para indicar que debe incluirse la condicion
         
             foreach(var v in (List<object>)value)
             {
-                if (include_cond)
-                {
-                    string sql_ = (option == "equal" || option == "approx") ? " OR " :  
-                }
+                if (include_con)
+                    if (option == "equal" || option == "approx")
+                        sql += " OR ";
+                    else if (option == "nonequal" || option == "nonapprox")
+                        sql += " AND ";
+                    else
+                        throw new Exception("Error al definir condicion " + field + " " + option + " " + value);
+                else
+                    include_con = true;
+
+                var condition_ = _sql_cond_field_check_value(field, option, v);
+                sql += condition_.sql;
+                param.AddRange(condition_.param);
             }
+
+            sql = @"(
+" + sql + @"
+)
+";
+            return (sql, param);
         }
 
-        protected (string sql, List<object>? param) _sql_cond_field(string field, string option, object value)
+        /*
+        Traducir campo y definir SQL con la opcion
+        */
+        protected (string sql, List<object>? param) _sql_cond_field(string field_name, string option, object value)
         {
-            throw new NotImplementedException();
+            var f = db.explode_field(entity_name, field_name);
+
+            if (option.StartsWith("$")) //condicion entre fields
+            {
+                var v = db.explode_field(entity_name, (string)value);
+                var field_sql1 = db.mapping(f["entity_name"], f["field_id"]).map(f["field_name"]);
+                var field_sql2 = db.mapping(v["entity_name"], v["field_id"]).map(v["field_name"]);
+
+                if (option == "approx")
+                    return (
+                        "(lower(CAST(" + field_sql1 + " AS CHAR)) LIKE CONCAT('%', lower(CAST(" + field_sql2 + " AS CHAR)), '%'))",
+                        new List<object>()
+                    );
+                else if(option == "nonapprox")
+                {
+                    return (
+                        "(lower(CAST(" + field_sql1 + " AS CHAR)) NOT LIKE CONCAT('%', lower(CAST(" + field_sql2 + " AS CHAR)), '%'))",
+                        new List<object>()
+                    );
+                }
+                else
+                {
+                    return (
+                        "(" + field_sql1 + " " + option + " " + field_sql2 + ") ",
+                        new List<object>()
+                    );
+                }               
+            }
+
+            return db.condition(f["entity_name"], f["field_id"]).cond(f["field_name"], option, value);
         }
 
 
-        
 
-        condition = {
-            "sql":"",
-            "params":()
-        }
-        cond = False #flag para indicar que debe imprimirse condicion
-
-        for v in value:
-            if cond:
-                sql = " {} ".format(OPTIONS["OR"]) if option == "EQUAL" or option == "APPROX" else " {} ".format(OPTIONS["AND"]) if option == "NONEQUAL" or option == "NONAPPROX" else False
-                if not sql:
-                    raise "Error al definir opción para " + field + " " + option + " " + value
-                condition["sql"] += sql
-
-            else:
-                cond = True
-
-            condition_ = self._sql_cond_field_check_value(field, option, v)
-            condition["sql"] += condition_["sql"]
-            condition["params"] = condition["params"] + condition_["params"]
-
-        return {
-            "sql":"""(
-""" + condition["sql"] + """
-)""",
-            "params":condition["params"]
     }
 
-}
 }

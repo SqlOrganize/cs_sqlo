@@ -6,25 +6,24 @@ using System.Text;
 
 namespace cs_sqlo
 {
-    public class Db
+    public abstract class Db
     {
-        public List<string> options = new()
-        {"equal","nonequal", "undefined", "default", ""
-            {"equal","="},
-            {"NONEQUAL","!="},
-            {"UNDEFINED","~"},
-            {"DEFAULT","DEFAULT"},
-            {"NONAPPROX","NONAPPROX"}, //comparacion apriximadamente distinto
-            {"APPROX","APPROX"},
-            {"APPROX_LEFT","APPROX_LEFT"},
-            {"APPROX_RIGHT","APPROX_RIGHT"},
-            {"AND","AND"},
-            {"OR","OR"},
-            {"$","$"}, //prefijo que indica field (utilizado para indicar concatenacion AND en condiciones)
-            {"LESS","<"},
-            {"LESS_EQUAL","<="},
-            {"GREATER",">"},
-            {"GREATER_EQUAL",">="},
+        public Dictionary<string, string> options = new(){
+            { "equal", "=" },
+            { "nonequal", "!=" },
+            { "undefined", "~" },
+            { "default", "" },
+            { "nonapprox", "" },
+            { "approx", "" },
+            { "approx_left", "" },
+            { "approx_right", "" },
+            { "default", "" },
+            { "and", "and" },
+            { "or", "or" },
+            { "less", "<" },
+            { "less_equal", "<=" },
+            { "greater", ">" },
+            { "greater_equal", ">=" },
         };
     
         protected Dictionary<string, object>? config { get; }
@@ -232,6 +231,12 @@ namespace cs_sqlo
         {
             return new EntityTools(this, entity_name);
         }
+
+        public abstract EntityQuery query(string entity_name);
+
+        public abstract Mapping mapping(string entity_name, string field_id);
+
+        public abstract Condition condition(string entity_name, string field_id);
 
         //field_by_id(self, entity_name:str, field_id:str) 
         //mapping(self, entity_name: str, field_id:str = "")

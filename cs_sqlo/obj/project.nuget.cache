@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "q+LsdRpXY6JSHmFislIBeoroCAgAxP6DvKkfd3/uoKUXunULYV5l1SHiSzqCFBAxOKCufOB2qDnQwuQwJzWUhg==",
+  "dgSpecHash": "s0QtTBjtvZvBaHngxMJjMUx8J5wQFTCgkWrppX6RGOF6ZKxVn0R+CXIIPLGKH7xVh0mkZjO1Z7dUB1oltVTg+g==",
   "success": true,
-  "projectFilePath": "C:\\xampp\\htdocs\\cs_sqlo\\cs_sqlo\\cs_sqlo.csproj",
+  "projectFilePath": "C:\\projects\\cs_sqlo\\cs_sqlo\\cs_sqlo.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\ivan\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\icastaneda\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }
