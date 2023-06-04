@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\projects\\cs_sqlo\\cs_sqlo_my\\cs_sqlo_my.csproj": {}
+    "C:\\xampp\\htdocs\\cs_sqlo\\cs_sqlo_my\\cs_sqlo_my.csproj": {}
   },
   "projects": {
-    "C:\\projects\\cs_sqlo\\cs_sqlo\\cs_sqlo.csproj": {
+    "C:\\xampp\\htdocs\\cs_sqlo\\cs_sqlo\\cs_sqlo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\projects\\cs_sqlo\\cs_sqlo\\cs_sqlo.csproj",
+        "projectUniqueName": "C:\\xampp\\htdocs\\cs_sqlo\\cs_sqlo\\cs_sqlo.csproj",
         "projectName": "cs_sqlo",
-        "projectPath": "C:\\projects\\cs_sqlo\\cs_sqlo\\cs_sqlo.csproj",
-        "packagesPath": "C:\\Users\\icastaneda\\.nuget\\packages\\",
-        "outputPath": "C:\\projects\\cs_sqlo\\cs_sqlo\\obj\\",
+        "projectPath": "C:\\xampp\\htdocs\\cs_sqlo\\cs_sqlo\\cs_sqlo.csproj",
+        "packagesPath": "C:\\Users\\ivan\\.nuget\\packages\\",
+        "outputPath": "C:\\xampp\\htdocs\\cs_sqlo\\cs_sqlo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\icastaneda\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ivan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,21 +61,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\projects\\cs_sqlo\\cs_sqlo_my\\cs_sqlo_my.csproj": {
+    "C:\\xampp\\htdocs\\cs_sqlo\\cs_sqlo_my\\cs_sqlo_my.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\projects\\cs_sqlo\\cs_sqlo_my\\cs_sqlo_my.csproj",
+        "projectUniqueName": "C:\\xampp\\htdocs\\cs_sqlo\\cs_sqlo_my\\cs_sqlo_my.csproj",
         "projectName": "cs_sqlo_my",
-        "projectPath": "C:\\projects\\cs_sqlo\\cs_sqlo_my\\cs_sqlo_my.csproj",
-        "packagesPath": "C:\\Users\\icastaneda\\.nuget\\packages\\",
-        "outputPath": "C:\\projects\\cs_sqlo\\cs_sqlo_my\\obj\\",
+        "projectPath": "C:\\xampp\\htdocs\\cs_sqlo\\cs_sqlo_my\\cs_sqlo_my.csproj",
+        "packagesPath": "C:\\Users\\ivan\\.nuget\\packages\\",
+        "outputPath": "C:\\xampp\\htdocs\\cs_sqlo\\cs_sqlo_my\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\icastaneda\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ivan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -89,8 +89,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\projects\\cs_sqlo\\cs_sqlo\\cs_sqlo.csproj": {
-                "projectPath": "C:\\projects\\cs_sqlo\\cs_sqlo\\cs_sqlo.csproj"
+              "C:\\xampp\\htdocs\\cs_sqlo\\cs_sqlo\\cs_sqlo.csproj": {
+                "projectPath": "C:\\xampp\\htdocs\\cs_sqlo\\cs_sqlo\\cs_sqlo.csproj"
               }
             }
           }
@@ -126,7 +126,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

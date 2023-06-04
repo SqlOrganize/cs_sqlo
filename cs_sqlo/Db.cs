@@ -8,7 +8,7 @@ namespace cs_sqlo
 {
     public abstract class Db
     {
-        public Dictionary<string, string> options = new(){
+        public static Dictionary<string, string> options = new(){
             { "equal", "=" },
             { "nonequal", "!=" },
             { "undefined", "~" },

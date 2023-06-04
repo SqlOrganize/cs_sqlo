@@ -61,12 +61,6 @@ namespace cs_sqlo
                 Field field = db.field(entity_name, field_name);
                 switch (field.type)
                 { 
-                    case "str":
-                        return "_str";
-
-                    case "bool":
-                        return "_bool";
-
                     default:
                         return "_default";
                 }

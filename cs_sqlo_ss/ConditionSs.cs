@@ -60,19 +60,18 @@ namespace cs_sqlo
         }
 
         public (string sql, List<object> param) _approx_cast(string field_name, string option, object value) {
-            if option == "approx": 
-                return {
-                "sql":"(LOWER(CAST(" + field_name + " AS CHAR)) LIKE LOWER(%s)) ",
-                    "params":("%" + value + "%", )
-                }
 
-            if option == "nonapprox":
-                return {
-                "sql":"(LOWER(CAST(" + field_name + " AS CHAR)) NOT LIKE LOWER(%s)) ",
-                    "params":("%" + value + "%", )
-                }
+            if (option == "nonapprox")
+                return (
+                    "(LOWER(CAST(" + field_name + " AS CHAR)) NOT LIKE LOWER(%s)) ",
+                    new List<Object>() { "%" + (string)value + "%" }
+                );
 
-            return { "sql":"", "params":() }
+            return (
+                "(LOWER(CAST(" + field_name + " AS CHAR)) LIKE LOWER(%s)) ",
+                new List<Object>() { "%" + (string)value + "%" }
+            );
+
         }
 
         public object _value(string field_name, object value) {
@@ -86,6 +85,6 @@ namespace cs_sqlo
 
             return v.sql(field_name)
         }
-
+zZ
     }
 }
