@@ -15,7 +15,7 @@ namespace cs_sqlo
 
         public List<(string msg, string? type)> errors { get; set; } = new(); //log de errores
 
-        Validation(object? _value) {
+        public Validation(object? _value) {
             value = _value;
         }
 
@@ -39,7 +39,7 @@ namespace cs_sqlo
                     }
                 break;
                 case "integer":
-                    if (value == (int)value)
+                    if (value is int)
                     {
                         errors.Add(("Value is not string", "type"));
 
@@ -48,6 +48,11 @@ namespace cs_sqlo
             }
             return this;
         }
+
+        public bool is_success() {
+            return (errors.IsNullOrEmpty()) ? true : false;
+        }
+
 
     }
 }

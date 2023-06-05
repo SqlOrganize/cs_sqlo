@@ -274,7 +274,7 @@
             return this;
         }
 
-        abstract public (string sql, List<object> param, string con) build();
+        abstract public (string sql, List<object> param) build();
 
     }
 

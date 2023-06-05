@@ -49,6 +49,10 @@ namespace cs_sqlo
         /* valor por defecto */
         public object default_value { get; set; }
 
+        public bool required { get; set; } = false;
+
+
+
         /* longitud maxima permitida */
         //protected int? _length;  
 

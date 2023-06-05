@@ -238,11 +238,12 @@ namespace cs_sqlo
 
         public abstract Condition condition(string entity_name, string field_id);
 
+        public Values values(string entity_name, string field_id)
+        {
+            return new Values(Db, entity_name, field_id)
+        }
+
         //field_by_id(self, entity_name:str, field_id:str) 
-        //mapping(self, entity_name: str, field_id:str = "")
-        //condition(self, entity_name: str, field_id:str = "")
-        //query(self, entity_name)
-        //values(self, entity_name: str, field_id:str = "")
 
     }
 

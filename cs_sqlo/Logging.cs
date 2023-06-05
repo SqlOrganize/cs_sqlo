@@ -67,7 +67,7 @@ namespace cs_sqlo
             }
         }
             
-        public void add_log(string key, string msg, Level level = 0, string type = null)
+        public void add_log(string key, string msg, string type = null, Level level = 0)
         {
             if (!logs.ContainsKey(key))
                 logs[key] = new List<(Level level, string msg, string? type)> { };
@@ -76,6 +76,11 @@ namespace cs_sqlo
             logs[key].Sort((x, y) => {
                 return x.level.CompareTo(y.level);
             });
+        }
+
+        public void add_error(string key, string msg, string type = null)
+        {
+            add_log(key, msg, type, Level.Error);
         }
 
         public Level? level_key(string key)

@@ -1,6 +1,10 @@
 ﻿
+using Newtonsoft.Json.Linq;
+using System.Linq;
+using System;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace cs_sqlo
 {
@@ -99,6 +103,143 @@ namespace cs_sqlo
             values[field_name] = (int)value;
         }
 
+        /*
+        Validacion
+        */
+        public bool check(string field_name)
+        {
+            logging.reset_logs(field_name);
+
+            var method = "check_" + field_name.Replace(".", "_");
+            Type thisType = this.GetType();
+            MethodInfo? m = thisType.GetMethod(method);
+            if (!m.IsNullOrEmpty())
+            {
+                return (bool)m!.Invoke(this, null);
+            }
+
+            Dictionary<string, object?> check_methods = _define_check_methods(field_name);
+
+            Validation v = new(values[field_name]);
+
+            foreach (var (check_method, param) in check_methods)
+            {
+                Type validationType = v.GetType();
+                m = validationType.GetMethod(check_method);
+                if (!m.IsNullOrEmpty())
+                {
+                    m!.Invoke(v, new object[] { param });
+                }
+                else
+                {
+                    logging.add_log(key: field_name, msg: "No existe el metodo de validacion", type: "check");
+                }
+            }
+
+            foreach (var error in v.errors)
+            {
+                logging.add_error(key: field_name, type: error.type, msg: error.msg);
+            }
+
+            return v.is_success();
+        }
+
+        public Dictionary<string, object?> _define_check_methods(string field_name)
+        {
+            List<string> p = field_name.Split(".").ToList();
+            Dictionary<string, object> r = new();
+
+            if (p.Count == 1) //traducir field_name sin funcion (por el momento solo se validan los fields sin funcion
+            {
+                Field field = db.field(entity_name, field_name);
+
+                r["type"] = field.type;
+                if(field.required) r["required"] = null;
+
+            }
+
+            return new();
+
+        }
+
+        /*
+        Convertir valor para que sea entendido por el motor de base de datos
+        */
+        /*
+        @example 
+        _sql("nombre")
+        _sql("nombre.max");
+        */
+        public override object sql(string field_name)
+        {
+            if (!values.ContainsKey(field_name))
+            {
+                throw new Exception(field_name + " no tiene valor definido");
+            }
+
+            var method = "sql_" + field_name.Replace(".", "_");
+            Type thisType = this.GetType();
+            MethodInfo m = thisType.GetMethod(method);
+            if (!m.IsNullOrEmpty())
+            {
+                return m!.Invoke(this, null);
+            }
+
+            List<string> p = field_name.Split('.').ToList();
+
+            if (p.Count == 1)
+            {
+                Field field = db.field(entity_name, p[0]);
+                switch (field.type)
+                {
+                    default:
+                        return _sql_default(field_name);
+                }
+            }
+
+            method = _define_sql_method(field_name);
+
+        }
+
+        public object _sql_default(string field_name) {
+            return values[field_name];
+        }
+
+        public string _define_sql_method(string field_name)
+        {
+            List<string> p = field_name.Split(".").ToList();
+            if (p.Count == 1)
+            {
+                Field field = db.field(entity_name, field_name);
+                switch (field.type)
+                {
+                    default:
+                        return "_sql_default";
+                }
+            }
+
+            string method = "_" + p[p.Count - 1]; //se traduce el metodo ubicado mas a la derecha (el primero en traducirse se ejecutara al final)
+            p.RemoveAt(p.Count - 1);
+
+            switch (method)
+            {
+                case "count":
+                case "avg":
+                case "sum":
+                    return "_default";
+
+                case "is_set":
+                case "exists":
+                    return "_exists";
+
+                case "y":
+                    return "_str";
+
+                default:
+                    return _define_sql_method(String.Join(".", p.ToArray())); //si no resuelve, intenta nuevamente (ejemplo field.count.max, intentara nuevamente con field.count)
+            }
+        }
 
     }
+
 }

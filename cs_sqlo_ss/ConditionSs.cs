@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using System;
 
 namespace cs_sqlo
 {
@@ -34,8 +35,8 @@ namespace cs_sqlo
                 return _approx_cast(field, option, value);
 
             return (
-                    "(" + field + " " + db.options[option] + " %s) ",
-                    _value(field_name, value)
+                    "(" + field + " " + Db.options[option] + " %s) ",
+                    new List<object>() { _value(field_name, value) }
             );
 
         }
@@ -75,15 +76,16 @@ namespace cs_sqlo
         }
 
         public object _value(string field_name, object value) {
-            v = db.values(self._entity_name, self._prefix)
+            Values v = db.values(entity_name, field_id);
 
-            v.sset(field_name, value)
+            v.sset(field_name, value);
 
-            if not v.check(field_name):
-                raise "Valor incorrecto al definir condicion: " + self._entity_name + " " + field_name + "  " + value
+            if (!v.check(field_name))
+            {
+                throw new Exception("Valor incorrecto al definir condicion: " + entity_name + " " + field_name + "  " + value);
+            }
 
-
-            return v.sql(field_name)
+            return v.get(field_name); //no se aplica formato sql, el formato lo hace la clase de acceso a la base de datos
         }
 zZ
     }
