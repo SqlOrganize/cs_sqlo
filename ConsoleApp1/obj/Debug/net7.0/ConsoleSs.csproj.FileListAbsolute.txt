@@ -53,3 +53,11 @@ C:\projects\cs_sqlo\ConsoleApp1\obj\Debug\net7.0\refint\ConsoleSs.dll
 C:\projects\cs_sqlo\ConsoleApp1\obj\Debug\net7.0\ConsoleSs.pdb
 C:\projects\cs_sqlo\ConsoleApp1\obj\Debug\net7.0\ConsoleSs.genruntimeconfig.cache
 C:\projects\cs_sqlo\ConsoleApp1\obj\Debug\net7.0\ref\ConsoleSs.dll
+C:\xampp\htdocs\cs_sqlo\ConsoleApp1\obj\Debug\net7.0\ConsoleSs.csproj.AssemblyReference.cache
+C:\xampp\htdocs\cs_sqlo\ConsoleApp1\obj\Debug\net7.0\ConsoleSs.GeneratedMSBuildEditorConfig.editorconfig
+C:\xampp\htdocs\cs_sqlo\ConsoleApp1\obj\Debug\net7.0\ConsoleSs.AssemblyInfoInputs.cache
+C:\xampp\htdocs\cs_sqlo\ConsoleApp1\obj\Debug\net7.0\ConsoleSs.AssemblyInfo.cs
+C:\xampp\htdocs\cs_sqlo\ConsoleApp1\obj\Debug\net7.0\ConsoleSs.csproj.CoreCompileInputs.cache
+C:\xampp\htdocs\cs_sqlo\ConsoleApp1\obj\Debug\net7.0\ConsoleSs.dll
+C:\xampp\htdocs\cs_sqlo\ConsoleApp1\obj\Debug\net7.0\refint\ConsoleSs.dll
+C:\xampp\htdocs\cs_sqlo\ConsoleApp1\obj\Debug\net7.0\ConsoleSs.pdb

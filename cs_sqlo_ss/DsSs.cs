@@ -34,5 +34,10 @@ namespace cs_sqlo_ss
         {
             return new ConditionSs(this, entity_name, field_id);
         }
+
+        public override Values values(string entity_name, string field_id)
+        {
+            return new ValuesSs(this, entity_name, field_id);
+        }
     }
 }

@@ -170,7 +170,7 @@ namespace cs_sqlo
         _sql("nombre")
         _sql("nombre.max");
         */
-        public override object sql(string field_name)
+        public object sql(string field_name)
         {
             if (!values.ContainsKey(field_name))
             {
@@ -197,7 +197,7 @@ namespace cs_sqlo
                 }
             }
 
-            method = _define_sql_method(field_name);
+            return _sql_aux(field_name);
 
         }
 
@@ -205,7 +205,7 @@ namespace cs_sqlo
             return values[field_name];
         }
 
-        public string _define_sql_method(string field_name)
+        public object _sql_aux(string field_name)
         {
             List<string> p = field_name.Split(".").ToList();
             if (p.Count == 1)
@@ -214,29 +214,22 @@ namespace cs_sqlo
                 switch (field.type)
                 {
                     default:
-                        return "_sql_default";
+                        return _sql_default(field_name);
                 }
             }
 
-            string method = "_" + p[p.Count - 1]; //se traduce el metodo ubicado mas a la derecha (el primero en traducirse se ejecutara al final)
+            string f = "_" + p[p.Count - 1]; //se traduce el metodo ubicado mas a la derecha (el primero en traducirse se ejecutara al final)
             p.RemoveAt(p.Count - 1);
 
-            switch (method)
+            switch (f)
             {
                 case "count":
                 case "avg":
                 case "sum":
-                    return "_default";
-
-                case "is_set":
-                case "exists":
-                    return "_exists";
-
-                case "y":
-                    return "_str";
+                    return _sql_default(field_name);
 
                 default:
-                    return _define_sql_method(String.Join(".", p.ToArray())); //si no resuelve, intenta nuevamente (ejemplo field.count.max, intentara nuevamente con field.count)
+                    return _sql_aux(String.Join(".", p.ToArray())); //si no resuelve, intenta nuevamente (ejemplo field.count.max, intentara nuevamente con field.count)
             }
         }
 

@@ -28,11 +28,6 @@ namespace cs_sqlo
     
         protected Dictionary<string, object>? config { get; }
         
-        
-        protected Dictionary<string, object> _mapping = new();
-        
-        protected Dictionary<string, object> _condition = new();
-
         public Dictionary<string, Dictionary<string, EntityTree>> tree { get; set; }
 
         public Dictionary<string, Dictionary<string, EntityRel>> relations { get; set; }
@@ -229,7 +224,7 @@ namespace cs_sqlo
 
         public EntityTools tools(string entity_name)
         {
-            return new EntityTools(this, entity_name);
+            return new (this, entity_name);
         }
 
         public abstract EntityQuery query(string entity_name);
@@ -238,10 +233,7 @@ namespace cs_sqlo
 
         public abstract Condition condition(string entity_name, string field_id);
 
-        public Values values(string entity_name, string field_id)
-        {
-            return new Values(Db, entity_name, field_id)
-        }
+        public abstract Values values(string entity_name, string field_id);
 
         //field_by_id(self, entity_name:str, field_id:str) 
 
