@@ -66,10 +66,7 @@ namespace cs_sqlo
             foreach (var field_name in field_names)
             {
                 object r = m.Invoke(this, new String[1] { field_name });
-                if ((string)r != db.undefined)
-                {
                     row[field_name] = r;
-                }
                 
             }
 

@@ -1,6 +1,4 @@
-﻿using cs_sqlo;
-
-namespace cs_sqlo_my
+﻿namespace cs_sqlo
 {
     public class EntityQueryMy : EntityQuery
     {

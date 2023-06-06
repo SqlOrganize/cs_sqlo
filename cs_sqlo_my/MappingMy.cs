@@ -1,4 +1,4 @@
-﻿namespace cs_sqlo_my
+﻿namespace cs_sqlo<>
 {
     /*
     Mapear campos para que sean entendidos por el motor de base de datos.

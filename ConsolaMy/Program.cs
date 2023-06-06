@@ -2,8 +2,6 @@
 
 
 using cs_sqlo;
-using cs_sqlo_my;
-using System.ComponentModel;
 
 Dictionary<string, object> config = new Dictionary<string, object>()
  {
@@ -16,10 +14,10 @@ Dictionary<string, object> config = new Dictionary<string, object>()
 
 //var db = new DbMy(config);
 DbMy db = new(config);
-Entity alumno = db.entity("alumno");
-Console.WriteLine(alumno.nf.Count);
-for (int i = 0; i < alumno.nf.Count; i++)
-{
-    Console.WriteLine(alumno.nf[i]);
-}
+//Entity alumno = db.entity("alumno");
+//Console.WriteLine(alumno.nf.Count);
+//for (int i = 0; i < alumno.nf.Count; i++)
+//{
+//    Console.WriteLine(alumno.nf[i]);
+//}
 
