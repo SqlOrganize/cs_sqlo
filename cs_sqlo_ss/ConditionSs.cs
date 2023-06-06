@@ -87,6 +87,5 @@ namespace cs_sqlo
 
             return v.get(field_name); //no se aplica formato sql, el formato lo hace la clase de acceso a la base de datos
         }
-zZ
     }
 }
