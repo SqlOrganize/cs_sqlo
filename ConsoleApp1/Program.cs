@@ -18,7 +18,7 @@ Dictionary<string, object> config = new Dictionary<string, object>()
 DbSs db = new(config);
 
 
-string var = @"[
+string c = @"[
     ['field', 'equal', 'something'],
     ['field2', 'equal', 'something'],
     [
@@ -27,9 +27,7 @@ string var = @"[
     ]
 ]
 ";
-var query2 = db.query("planificacion").unique(("plan","31073351"),("anio","20310733513")).cond(@"
-sda
-");
+var query2 = db.query("planificacion").unique(("plan","31073351"),("anio","20310733513"));
 
 Console.WriteLine(query2.ToString());
 

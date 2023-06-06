@@ -1,7 +1,8 @@
-﻿using cs_sqlo;
+﻿
+using cs_sqlo;
 using MySql.Data.MySqlClient;
 
-namespace cs_sqlo_my
+namespace cs_sqlo
 {
 
     public class DbMy : Db
@@ -21,7 +22,26 @@ namespace cs_sqlo_my
 
         public MySqlConnection conn() => _conn;
 
-    }
+        public override EntityQuery query(string entity_name)
+        {
+            return new EntityQueryMy(this, entity_name);
+        }
 
+
+        public override Mapping mapping(string entity_name, string field_id)
+        {
+            return new MappingMy(this, entity_name, field_id);
+        }
+
+        public override Condition condition(string entity_name, string field_id)
+        {
+            return new ConditionMy(this, entity_name, field_id);
+        }
+
+        public override Values values(string entity_name, string field_id)
+        {
+            return new ValuesMy(this, entity_name, field_id);
+        }
+    }
 
 }
