@@ -23,7 +23,7 @@ namespace cs_sqlo
 
         public string pt()
         {
-            return (field_id.IsNullOrEmpty()) ? field_id : db.entity(entity_name).alias;
+            return (!field_id.IsNullOrEmpty()) ? field_id : db.entity(entity_name).alias;
         }
 
         /*

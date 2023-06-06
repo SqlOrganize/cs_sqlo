@@ -4,17 +4,17 @@
     "default": null,
     "alias": "id",
     "entity_name": "alumno",
-    "type": "str",  
+    "type": "str",
     "length": 45,
     "name": "id"
   },
 
-  "": anio_ingreso{
+  "anio_ingreso": {
     "field_type": "nf",
     "default": null,
     "alias": "ai",
     "entity_name": "alumno",
-    "type": "str",  
+    "type": "str",
     "length": 45,
     "name": "anio_ingreso"
   },
@@ -24,7 +24,7 @@
     "default": null,
     "alias": "obs",
     "entity_name": "alumno",
-    "type": "str",  
+    "type": "str",
     "length": 65535,
     "name": "observaciones"
   },
@@ -34,8 +34,8 @@
     "default": null,
     "alias": "per",
     "entity_name": "alumno",
-    "entity_ref_name": "persona",  
-    "type": "str",  
+    "entity_ref_name": "persona",
+    "type": "str",
     "length": 45,
     "name": "persona"
   },
@@ -45,7 +45,7 @@
     "default": null,
     "alias": "ei",
     "entity_name": "alumno",
-    "type": "str",  
+    "type": "str",
     "length": 45,
     "name": "estado_inscripcion"
   },
@@ -55,7 +55,7 @@
     "default": null,
     "alias": "ft",
     "entity_name": "alumno",
-    "type": "date",  
+    "type": "date",
     "name": "fecha_titulacion"
   },
 
@@ -64,8 +64,8 @@
     "default": null,
     "alias": "pla",
     "entity_name": "alumno",
-    "entity_ref_name": "plan",  
-    "type": "str",  
+    "entity_ref_name": "plan",
+    "type": "str",
     "length": 45,
     "name": "plan"
   },
@@ -75,8 +75,8 @@
     "default": null,
     "alias": "ri",
     "entity_name": "alumno",
-    "entity_ref_name": "resolucion",  
-    "type": "str",  
+    "entity_ref_name": "resolucion",
+    "type": "str",
     "length": 45,
     "name": "resolucion_inscripcion"
   },
@@ -86,7 +86,7 @@
     "default": null,
     "alias": "aia",
     "entity_name": "alumno",
-    "type": "int",  
+    "type": "int",
     "length": 1,
     "name": "anio_inscripcion"
   },
@@ -96,7 +96,7 @@
     "default": null,
     "alias": "si",
     "entity_name": "alumno",
-    "type": "int",  
+    "type": "int",
     "length": 1,
     "name": "semestre_inscripcion"
   },
@@ -106,7 +106,7 @@
     "default": null,
     "alias": "sia",
     "entity_name": "alumno",
-    "type": "int",  
+    "type": "int",
     "length": 1,
     "name": "semestre_ingreso"
   },
@@ -116,7 +116,7 @@
     "default": null,
     "alias": "al",
     "entity_name": "alumno",
-    "type": "str",  
+    "type": "str",
     "length": 255,
     "name": "adeuda_legajo"
   },
@@ -126,7 +126,7 @@
     "default": null,
     "alias": "ad",
     "entity_name": "alumno",
-    "type": "str",  
+    "type": "str",
     "length": 255,
     "name": "adeuda_deudores"
   },
@@ -136,7 +136,7 @@
     "default": null,
     "alias": "di",
     "entity_name": "alumno",
-    "type": "str",  
+    "type": "str",
     "length": 255,
     "name": "documentacion_inscripcion"
   },
@@ -146,7 +146,7 @@
     "default": null,
     "alias": "aic",
     "entity_name": "alumno",
-    "type": "bool",  
+    "type": "bool",
     "length": 1,
     "name": "anio_inscripcion_completo"
   },
@@ -156,7 +156,7 @@
     "default": null,
     "alias": "eia",
     "entity_name": "alumno",
-    "type": "str",  
+    "type": "str",
     "length": 255,
     "name": "establecimiento_inscripcion"
   },
@@ -166,7 +166,7 @@
     "default": null,
     "alias": "lf",
     "entity_name": "alumno",
-    "type": "str",  
+    "type": "str",
     "length": 255,
     "name": "libro_folio"
   },
@@ -176,7 +176,7 @@
     "default": null,
     "alias": "lib",
     "entity_name": "alumno",
-    "type": "str",  
+    "type": "str",
     "length": 45,
     "name": "libro"
   },
@@ -186,7 +186,7 @@
     "default": null,
     "alias": "fol",
     "entity_name": "alumno",
-    "type": "str",  
+    "type": "str",
     "length": 45,
     "name": "folio"
   },
@@ -196,7 +196,7 @@
     "default": null,
     "alias": "com",
     "entity_name": "alumno",
-    "type": "str",  
+    "type": "str",
     "length": 65535,
     "name": "comentarios"
   },
@@ -206,7 +206,7 @@
     "default": "0",
     "alias": "td",
     "entity_name": "alumno",
-    "type": "bool",  
+    "type": "bool",
     "length": 1,
     "name": "tiene_dni"
   },
@@ -216,7 +216,7 @@
     "default": "0",
     "alias": "tc",
     "entity_name": "alumno",
-    "type": "bool",  
+    "type": "bool",
     "length": 1,
     "name": "tiene_constancia"
   },
@@ -226,7 +226,7 @@
     "default": "0",
     "alias": "tca",
     "entity_name": "alumno",
-    "type": "bool",  
+    "type": "bool",
     "length": 1,
     "name": "tiene_certificado"
   },
@@ -236,7 +236,7 @@
     "default": "0",
     "alias": "pc",
     "entity_name": "alumno",
-    "type": "bool",  
+    "type": "bool",
     "length": 1,
     "name": "previas_completas"
   },
@@ -246,7 +246,7 @@
     "default": "0",
     "alias": "tp",
     "entity_name": "alumno",
-    "type": "bool",  
+    "type": "bool",
     "length": 1,
     "name": "tiene_partida"
   },
@@ -256,7 +256,7 @@
     "default": "current_timestamp()",
     "alias": "cre",
     "entity_name": "alumno",
-    "type": "datetime",  
+    "type": "datetime",
     "name": "creado"
   },
 
@@ -265,7 +265,7 @@
     "default": "0",
     "alias": "cd",
     "entity_name": "alumno",
-    "type": "bool",  
+    "type": "bool",
     "length": 1,
     "name": "confirmado_direccion"
   }

@@ -204,7 +204,7 @@ namespace cs_sqlo
                 {
                     { "field_id", f[0] },
                     { "entity_name", relations[entity_name][f[0]].entity_name },
-                    { "field_name", f[0] },
+                    { "field_name", f[1] },
                 };
 
             }

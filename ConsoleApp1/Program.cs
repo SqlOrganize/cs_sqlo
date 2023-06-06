@@ -16,20 +16,13 @@ Dictionary<string, object> config = new Dictionary<string, object>()
 
 //var db = new DbMy(config);
 DbSs db = new(config);
+string query = db.query("alumno")
+    .fa("$persona-nombres.max")
+    .w("$persona-apellidos IS NOT NULL")
+    .g("$persona_nombres, $persona_apellidos").sql();
+//.w("($persona-nombres.count = @p1)")
 
 
-string c = @"[
-    ['field', 'equal', 'something'],
-    ['field2', 'equal', 'something'],
-    [
-        ['field3', 'equal', 'something'],
-        ['field3', 'equal', 'something', 'OR']  
-    ]
-]
-";
-var query2 = db.query("planificacion").unique(("plan","31073351"),("anio","20310733513"));
-
-Console.WriteLine(query2.ToString());
 
 //Entity alumno = db.entity("alumno");
 

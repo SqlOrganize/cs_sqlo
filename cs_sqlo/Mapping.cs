@@ -38,30 +38,33 @@ namespace cs_sqlo
         */
         public string map(string field_name)
         {
-            var method = field_name.Replace(".", "_");
-            Type thisType = this.GetType();
-            MethodInfo m = thisType.GetMethod(method);
-            if (!m.IsNullOrEmpty())
-            {
-                var r = m.Invoke(this, null);
-                return (string)r!;
-            }
-
             List<string> p = field_name.Split('.').ToList();
 
             if(p.Count == 1) {
                 return _default(field_name);
             }
 
-            method = "_" + p[p.Count - 1]; //se traduce el metodo ubicado mas a la derecha (el primero en traducirse se ejecutara al final)
+            string method = p[p.Count - 1]; //se traduce el metodo ubicado mas a la derecha (el primero en traducirse se ejecutara al final)
             p.RemoveAt(p.Count - 1);
-            return (string)thisType.GetMethod(method).Invoke(this, new String[1] { String.Join(".", p.ToArray()) });
+            switch (method)
+            {
+                case "count":
+                    return _count(String.Join(".", p.ToArray()));
+
+                default:
+                    return this.map(String.Join(".", p.ToArray()));
+            }
+
+
         }
 
         /**
          * mapeo por defecto
          */
         public abstract string _default(string field_name);
+
+        public abstract string _count(string field_name);
+
 
     }
 }

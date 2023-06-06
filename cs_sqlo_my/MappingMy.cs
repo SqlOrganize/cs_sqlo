@@ -22,6 +22,11 @@
         {
         }
 
+        public override string _count(string field_name)
+        {
+            throw new NotImplementedException();
+        }
+
         public override string _default(string field_name) {
             return pt() + "." + field_name;
         }
