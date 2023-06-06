@@ -14,6 +14,8 @@ Dictionary<string, object> config = new Dictionary<string, object>()
 
 //var db = new DbMy(config);
 DbMy db = new(config);
+db.query("alumno").cond(new List<object> { "anio_ingreso","equal","1"}).build();
+System.Console.WriteLine("end");
 //Entity alumno = db.entity("alumno");
 //Console.WriteLine(alumno.nf.Count);
 //for (int i = 0; i < alumno.nf.Count; i++)
@@ -21,3 +23,4 @@ DbMy db = new(config);
 //    Console.WriteLine(alumno.nf[i]);
 //}
 
+//(("anio_ingreso.max -APPROX- 1) AND (anio_ingreso.max = null))";

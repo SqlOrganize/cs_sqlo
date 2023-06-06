@@ -9,7 +9,7 @@
     "name": "id"
   },
 
-  "anio_ingreso": {
+  "": anio_ingreso{
     "field_type": "nf",
     "default": null,
     "alias": "ai",

@@ -9,7 +9,8 @@
 
         public override (string sql, List<object> param) build()
         {
-            throw new NotImplementedException();
+            (string sql, List<object>? param) cond = _sql_cond(_condition);
+            return("",new List<object> { });
         }
 
         /*
