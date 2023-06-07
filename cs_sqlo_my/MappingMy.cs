@@ -22,13 +22,14 @@
         {
         }
 
-        public override string _count(string field_name)
+        public override string _default(string field_name)
         {
-            throw new NotImplementedException();
+            return pt() + "." + field_name;
         }
 
-        public override string _default(string field_name) {
-            return pt() + "." + field_name;
+        public override string _count(string field_name)
+        {
+            return "COUNT(DISTINCT " + map(field_name) + ")";
         }
 
     }

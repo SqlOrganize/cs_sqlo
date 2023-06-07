@@ -29,7 +29,7 @@
         public override string _count(string field_name)
         {
             return "COUNT(DISTINCT " +  map(field_name) + ")";
-    }
+        }
 
     }
 }

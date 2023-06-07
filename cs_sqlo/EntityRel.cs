@@ -10,6 +10,7 @@ namespace cs_sqlo
     {
         public string field_name { get; set; }
         public string entity_name { get; set; }
+        public string field_ref_name { get; set; } = "id";
         public string parent_id { get; set; }
     }
 }

@@ -25,6 +25,11 @@ namespace cs_sqlo
         public string? entity_ref_name { get; set; }
 
         /* 
+        si es clave foranea: Nombre del field al que hace referencia de la entidad referenciada
+        */
+        public string? field_ref_name { get; set; } = "id";
+
+        /* 
         tipo de datos generico 
             int
             blob
