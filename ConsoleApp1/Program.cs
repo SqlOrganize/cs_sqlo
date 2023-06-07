@@ -3,8 +3,11 @@
 
 using cs_sqlo;
 using cs_sqlo_ss;
+using Microsoft.Data.SqlClient;
 using System.ComponentModel;
-
+using System.Data.Common;
+using System.Data;
+using Newtonsoft.Json;
 
 Dictionary<string, object> config = new Dictionary<string, object>()
  {
@@ -16,14 +19,18 @@ Dictionary<string, object> config = new Dictionary<string, object>()
 
 //var db = new DbMy(config);
 DbSs db = new(config);
-string query = db.query("alumno")
-    .fa("$persona-nombres.max")
-    .w("$persona-apellidos IS NOT NULL")
-    .g("$persona_nombres, $persona_apellidos").sql();
-//.w("($persona-nombres.count = @p1)")
+var data = db.query("SUJETOS")
+    .FieldsAs()
+    .Order("$APELLIDO ASC, $NOMBRES ASC")
+    .Size(100)
+    .fetch_all();
+
+
+string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+
+Console.WriteLine(json);
 
 
 
-//Entity alumno = db.entity("alumno");
 
 

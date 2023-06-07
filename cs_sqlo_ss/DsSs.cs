@@ -12,8 +12,6 @@ namespace cs_sqlo_ss
          */
         public DbSs(Dictionary<string, object> config) : base(config)
         {
-            using SqlConnection _conn = new SqlConnection((string)config["connection_string"]);
-            _conn.Open();   
         }
 
         public SqlConnection conn() => _conn;

@@ -1,0 +1,165 @@
+{
+  "NROIDP": {
+    "field_type": "pk",
+    "default": null,
+    "alias": "id",
+    "entity_name": "SUJETOS",
+    "type": "int",
+    "length": 45,
+    "name": "NROIDP"
+  },
+
+  "APELLIDO": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "ape",
+    "entity_name": "SUJETOS",
+    "type": "string",
+    "length": 50,
+    "name": "APELLIDO"
+  },
+
+  "NOMBRES": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "nom",
+    "entity_name": "SUJETOS",
+    "type": "string",
+    "length": 50,
+    "name": "NOMBRES"
+  },
+
+  "TD": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "td",
+    "entity_name": "SUJETOS",
+    "type": "string",
+    "length": 10,
+    "name": "TD"
+  },
+
+  "NDOC": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "nd",
+    "entity_name": "SUJETOS",
+    "type": "string",
+    "length": 11,
+    "name": "NDOC"
+  },
+
+  "CARACTER": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "car",
+    "entity_name": "SUJETOS",
+    "type": "string",
+    "length": 1,
+    "name": "NDOC"
+  },
+
+  "FECHA_CARGA": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "fc",
+    "entity_name": "SUJETOS",
+    "type": "DateTime",
+    "name": "NDOC"
+  },
+
+  "DJ": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "dj",
+    "entity_name": "SUJETOS",
+    "type": "string",
+    "length": 2,
+    "name": "DJ"
+  },
+
+  "DOCUMENTO": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "doc",
+    "entity_name": "SUJETOS",
+    "type": "int",
+    "name": "DOCUMENTO"
+  },
+
+  "TIPO_DOC": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "tdo",
+    "entity_name": "SUJETOS",
+    "type": "string",
+    "length": 10,
+    "name": "TIPO_DOC"
+  },
+
+  "CARACTER_ABO": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "ca",
+    "entity_name": "SUJETOS",
+    "type": "string",
+    "length": 10,
+    "name": "CARACTER_ABO"
+  },
+
+  "DOMICILIO": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "dom",
+    "entity_name": "SUJETOS",
+    "type": "string",
+    "length": 200,
+    "name": "DOMICILIO"
+  },
+
+  "FECHA_NACIM": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "fn",
+    "entity_name": "SUJETOS",
+    "type": "DateTime",
+    "name": "FECHA_NACIM"
+  },
+
+  "EDAD": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "eda",
+    "entity_name": "SUJETOS",
+    "type": "int",
+    "name": "EDAD"
+  },
+
+  "ES_MENOR": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "em",
+    "entity_name": "SUJETOS",
+    "type": "bool",
+    "name": "ES_MENOR"
+  },
+
+  "SUJETO_PRINCIPAL": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "sp",
+    "entity_name": "SUJETOS",
+    "type": "bool",
+    "name": "SUJETO_PRINCIPAL"
+  },
+
+  "DOMICILIO_LABORAL": {
+    "field_type": "nf",
+    "default": null,
+    "alias": "dl",
+    "entity_name": "SUJETOS",
+    "type": "string",
+    "length": 200,
+    "name": "DOMICILIO_LABORAL"
+  }
+}

@@ -1,9 +1,16 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
+using System.Data.Common;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace cs_sqlo
 {
+
+    /*
+    Consulta y formato de datos
+
+    Efectua la consulta a la base de datos y la transforma en el formato solicitado
+    */
     public abstract class EntityQuery
     {
         public Db db { get; }
@@ -68,11 +75,19 @@ namespace cs_sqlo
             return this;
         }
 
+
+        public EntityQuery Fields()
+        {
+            fields += string.Join(", ", db.tools(entity_name).field_names().Select(x => "$" + x));
+            return this;
+        }
+
         public EntityQuery Fields(string f)
         {
             fields += f;
             return this;
         }
+
 
         public EntityQuery FieldsAs()
         {
@@ -168,8 +183,8 @@ namespace cs_sqlo
         protected string sql_join()
         {
             string sql = "";
-            Dictionary<string, EntityTree> tree = db.tree[entity_name];
-            sql += sql_join_fk(tree, "");
+            if (db.tree.ContainsKey(entity_name))
+                sql += sql_join_fk(db.tree[entity_name], "");
             return sql;
         }
 
@@ -192,66 +207,121 @@ namespace cs_sqlo
 
         public string Sql()
         {
-            if (order.IsNullOrEmpty()) order = string.Join(", ", db.entity(entity_name).order_default.Select(x => "$" + x));
-            
-
             var sql = "SELECT ";
             sql += sql_fields();
             sql += sql_from();
             sql += sql_join();
-            sql += (where.IsNullOrEmpty()) ? "" : "WHERE " + traduce(where) + @"
-";
-            sql += (group.IsNullOrEmpty()) ? "" : "GROUP BY " + traduce(group) + @"
-";
-            sql += (having.IsNullOrEmpty()) ? "" : "HAVING " + traduce(having) + @"
-";
-            sql += (order.IsNullOrEmpty()) ? "" : "ORDER BY " + traduce(order) + @"
-";
-            sql += limit();
+            sql += sql_where();
+            sql += sql_group();
+            sql += sql_having();
+            sql += sql_order();
+            sql += sql_limit();
 
             return sql;
         }
 
+        protected string sql_where()
+        {
+            return (where.IsNullOrEmpty()) ? "" : "WHERE " + traduce(where!) + @"
+";
+        }
+
+        protected string sql_group()
+        {
+            return (group.IsNullOrEmpty()) ? "" : "GROUP BY " + traduce(group!) + @"
+";
+        }
+
+        protected string sql_having()
+        {
+            return (having.IsNullOrEmpty()) ? "" : "HAVING " + traduce(having!) + @"
+";
+        }
+
+        protected string sql_order()
+        {
+            if (order.IsNullOrEmpty())
+            {
+                var o = db.entity(entity_name).order_default;
+                order = o.IsNullOrEmpty() ? "" : string.Join(", ", o.Select(x => "$" + x));
+            }
+
+            return (order.IsNullOrEmpty()) ? "" : "ORDER BY " + traduce(order!) + @"
+";
+        }
         protected string sql_fields()
         {
             string f = concat(traduce(this.fields), @"
 ");
-            f += concat(traduce(this.fields_as, true), @",
+            var p = traduce(this.fields_as, true);
+            f += concat(p, @",
 ", "", !f.IsNullOrEmpty());
 
             f += concat(traduce(this.group), @",
 ", "", !f.IsNullOrEmpty());
 
-            return f;
+            return f + @"
+";
         }
 
         protected string sql_from()
         {
-            return @" FROM 
-" + db.entity(entity_name).schema_name + " AS " + db.entity(entity_name).alias + @"
+            return @"FROM " + db.entity(entity_name).schema_name + " AS " + db.entity(entity_name).alias + @"
 ";
         }
 
-        protected  string limit()
-        {
-            if (!size.IsNullOrEmpty()) return "";
-            page = page.IsNullOrEmpty() ? 1 : page;
-            return " LIMIT " + size  + " OFFSET " + ((page - 1) * size ) + @"
-";
-        }
+        protected abstract string sql_limit();
+       
 
-        protected string concat(string? value, string connect_no_empty, string connect_empty = "", bool connect_cond = false)
+        protected string concat(string? value, string connect_true, string connect_false = "", bool connect_cond = true)
         {
             if (value.IsNullOrEmpty()) return "";
 
             string connect = "";
-            if (!connect_empty.IsNullOrEmpty())
-                connect = connect_cond ? connect_no_empty! : connect_empty;
+            if (connect_cond)
+                connect = connect_true;
             else
-                connect = connect_no_empty;
+                connect = connect_false;
 
             return connect + " " + value;
         }
+
+
+
+        public abstract List<Dictionary<string, object>> fetch_all();
+
+        /*
+        public abstract Dictionary<string, object> fetch_assoc();
+
+        public abstract List<List<object>> fetch_row();
+
+        public abstract List<object> fetch_column();
+
+        public abstract List<Dictionary<string, object>> tree();
+
+        public abstract List<Dictionary<string, string>> json_tree();
+
+        public abstract List<Dictionary<string, object>> rel();
+
+        public abstract List<Dictionary<string, string>> json_rel();
+
+        public abstract Dictionary<string, object>? one_or_null();
+
+        public abstract Dictionary<string, object>? one();
+
+        public abstract Dictionary<string, object>? first_or_null();
+
+        public abstract Dictionary<string, object>? first();
+
+        public abstract Dictionary<string, string>? json_one();
+
+        public abstract List<object>? column(int number = 0);
+        */
+
+
+
+
+
 
 
     }

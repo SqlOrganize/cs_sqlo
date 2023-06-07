@@ -18,9 +18,10 @@
         {
             List<string> field_names_r = new();
 
-            foreach((string field_id, EntityRel er) in db.relations[entity_name])
-                foreach(string field_name in db.field_names(er.entity_name))
-                    field_names_r.Add(field_id + "-" + field_name);
+            if(db.relations.ContainsKey(entity_name))
+                foreach((string field_id, EntityRel er) in db.relations[entity_name])
+                    foreach(string field_name in db.field_names(er.entity_name))
+                        field_names_r.Add(field_id + "-" + field_name);
 
             return db.field_names(entity_name).Concat(field_names_r).ToList();
         }

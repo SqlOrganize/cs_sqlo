@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="model\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\cs_sqlo_ss\cs_sqlo_ss.csproj" />
   </ItemGroup>
 

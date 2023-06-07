@@ -26,11 +26,11 @@ namespace cs_sqlo
             { "greater_equal", ">=" },
         };
     
-        protected Dictionary<string, object>? config { get; }
-        
-        public Dictionary<string, Dictionary<string, EntityTree>> tree { get; set; }
+        public Dictionary<string, object>? config { get; }
 
-        public Dictionary<string, Dictionary<string, EntityRel>> relations { get; set; }
+        public Dictionary<string, Dictionary<string, EntityTree>> tree { get; set; } = new();
+
+        public Dictionary<string, Dictionary<string, EntityRel>> relations { get; set; } = new();
 
         public Dictionary<string, Entity> entities { get; set; }
 
@@ -44,12 +44,12 @@ namespace cs_sqlo
             string path = config["path_model"] + "entity-tree.json";
             using (StreamReader r = new StreamReader(path, Encoding.UTF8))
             {
-                 tree = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, EntityTree>>>(r.ReadToEnd())!;
+                if(r.Peek() != -1) tree = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, EntityTree>>>(r.ReadToEnd())!;
             }
 
             using (StreamReader r = new StreamReader(config["path_model"] + "entity-relations.json"))
             {
-                relations = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, EntityRel>>>(r.ReadToEnd())!;
+                if (r.Peek() != -1) relations = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, EntityRel>>>(r.ReadToEnd())!;
             }
 
             using (StreamReader r = new StreamReader(config["path_model"] + "_entities.json"))
