@@ -85,6 +85,14 @@ namespace cs_sqlo
                    o.GetType().GetGenericTypeDefinition().IsAssignableFrom(typeof(List<>));
         }
 
+        public static bool IsTuple(this object o)
+        {
+            if (o == null) return false;
+            return o is IList &&
+                   o.GetType().IsGenericType &&
+                   o.GetType().GetGenericTypeDefinition().IsAssignableFrom(typeof(Tuple<>));
+        }
+
         public static bool IsDictionary(this object o)
         {
             if (o == null) return false;
@@ -145,6 +153,17 @@ namespace cs_sqlo
             return result;
         }
 
+        public static string ReplaceFirst(this string @this, string oldValue, string newValue)
+        {
+            int startindex = @this.IndexOf(oldValue);
+
+            if (startindex == -1)
+            {
+                return @this;
+            }
+
+            return @this.Remove(startindex, oldValue.Length).Insert(startindex, newValue);
+        }
     }
 
 

@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data.Common;
 using System.Data;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 Dictionary<string, object> config = new Dictionary<string, object>()
  {
@@ -19,11 +20,10 @@ Dictionary<string, object> config = new Dictionary<string, object>()
 
 //var db = new DbMy(config);
 DbSs db = new(config);
-var data = db.query("SUJETOS")
-    .FieldsAs()
-    .Order("$APELLIDO ASC, $NOMBRES ASC")
-    .Size(100)
-    .fetch_all();
+var data = db.query("SUJETOS").
+    Where("$FECHA_CARGA = @0").
+    Parameters("2007-12-04").
+    fetch_all();
 
 
 string json = JsonConvert.SerializeObject(data, Formatting.Indented);
