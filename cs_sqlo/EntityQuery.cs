@@ -60,7 +60,9 @@ namespace cs_sqlo
         /*
         Similar a fields pero campo de agrupamiento
         */
-        protected string group { get; set; } = "";
+        public string group { get; set; } = "";
+
+        public List<object> parameters = new List<object> { };
 
         public EntityQuery(Db _db, string _entity_name)
         {
@@ -100,6 +102,13 @@ namespace cs_sqlo
             fields_as += f;
             return this;
         }
+
+        public EntityQuery Parameters(params object[] parameters)
+        {
+            this.parameters.AddRange(parameters.ToList());
+            return this;
+        }
+
 
         protected string traduce(string _sql, bool flag_as = false)
         {
@@ -238,19 +247,14 @@ namespace cs_sqlo
 ";
         }
 
-        protected string sql_order()
-        {
-            if (order.IsNullOrEmpty())
-            {
-                var o = db.entity(entity_name).order_default;
-                order = o.IsNullOrEmpty() ? "" : string.Join(", ", o.Select(x => "$" + x));
-            }
+        protected abstract string sql_order();
 
-            return (order.IsNullOrEmpty()) ? "" : "ORDER BY " + traduce(order!) + @"
-";
-        }
+
         protected string sql_fields()
         {
+            if(this.fields.IsNullOrEmpty() && this.fields_as.IsNullOrEmpty() && this.group.IsNullOrEmpty())
+                this.FieldsAs();
+
             string f = concat(traduce(this.fields), @"
 ");
             var p = traduce(this.fields_as, true);
@@ -287,8 +291,26 @@ namespace cs_sqlo
         }
 
 
+        /*
+        Obtener todas las filas
 
+        Convert the result to json with "JsonConvert.SerializeObject(data, Formatting.Indented)"
+        */
         public abstract List<Dictionary<string, object>> fetch_all();
+
+        /*
+        Obtener arbol
+
+        Convert the result to json with "JsonConvert.SerializeObject(data, Formatting.Indented)"
+        */
+        public abstract List<Dictionary<string, object>> tree();
+
+        /*
+        Obtener todas las filas
+
+        Convert the result to json with "JsonConvert.SerializeObject(data, Formatting.Indented)"
+        */
+
 
         /*
         public abstract Dictionary<string, object> fetch_assoc();

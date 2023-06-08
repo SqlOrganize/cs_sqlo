@@ -9,7 +9,12 @@ namespace cs_sqlo
         {
         }
 
-        public override DbDataReader execute()
+        public override List<Dictionary<string, object>> fetch_all()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<Dictionary<string, object>> tree()
         {
             throw new NotImplementedException();
         }
@@ -19,6 +24,18 @@ namespace cs_sqlo
             if (size.IsNullOrEmpty()) return "";
             page = page.IsNullOrEmpty() ? 1 : page;
             return "LIMIT " + size + " OFFSET " + ((page - 1) * size) + @"
+";
+        }
+
+        protected override string sql_order()
+        {
+            if (order.IsNullOrEmpty())
+            {
+                var o = db.entity(entity_name).order_default;
+                order = o.IsNullOrEmpty() ? "" : string.Join(", ", o.Select(x => "$" + x));
+            }
+
+            return (order.IsNullOrEmpty()) ? "" : "ORDER BY " + traduce(order!) + @"
 ";
         }
     }
